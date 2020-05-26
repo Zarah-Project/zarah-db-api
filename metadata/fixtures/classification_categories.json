@@ -1,0 +1,59 @@
+[
+  {
+    "model": "metadata.classificationcategory",
+    "pk": 1,
+    "fields": {
+      "key": "activist_repertoire",
+      "name": "Activists Repertoire"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 2,
+    "fields": {
+      "key": "activist_repertoire_scale",
+      "name": "Scale of Repertoire Actions"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 3,
+    "fields": {
+      "key": "agendas",
+      "name": "Agendas"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 4,
+    "fields": {
+      "key": "effects_of_activism",
+      "name": "Effects of Activism"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 5,
+    "fields": {
+      "key": "labour_relations",
+      "name": "Labour Relations"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 6,
+    "fields": {
+      "key": "labour_conditions",
+      "name": "Labour Conditions"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 7,
+    "fields": {
+      "key": "historical_context",
+      "name": "Historical Context"
+    }
+  }, {
+    "model": "metadata.classificationcategory",
+    "pk": 8,
+    "fields": {
+      "key": "activism_broad_patterns",
+      "name": "Broad Patterns of Activism and Non-Activism"
+    }
+  }
+]

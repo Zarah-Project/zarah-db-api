@@ -1,0 +1,72 @@
+from django.db import models
+
+
+class Classification(models.Model):
+    document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='classifications')
+    classification_field = models.ForeignKey('ClassificationField', on_delete=models.PROTECT)
+    classification_other_text = models.TextField(blank=True)
+
+    class Meta:
+        db_table = 'classifications'
+        unique_together = ('document', 'classification_field')
+
+
+class ClassificationCategory(models.Model):
+    key = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'classification_categories'
+        verbose_name = 'Classification Category'
+        verbose_name_plural = 'Classification Categories'
+
+
+class ClassificationField(models.Model):
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='children')
+    category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
+    field_type = models.CharField(max_length=5, choices=[('tag', 'tag'), ('group', 'group'), ('other', 'other')])
+    field = models.CharField(max_length=200)
+
+    @property
+    def full_name(self):
+        if self.parent:
+            return "%s -> %s" % (self.parent.full_name, self.field)
+        else:
+            return self.field
+
+    def __str__(self):
+        return "%s -> %s"[0:80] % (self.category.name, self.full_name)
+
+    class Meta:
+        db_table = 'classification_fields'
+
+
+class ClassificationFurtherExplanation(models.Model):
+    document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='explanations')
+    category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
+    explanation = models.TextField()
+
+    class Meta:
+        db_table = 'classification_further_explanations'
+        unique_together = ('document', 'category')
+
+
+class ConsentType(models.Model):
+    key = models.CharField(max_length=50)
+    type = models.CharField(max_length=400)
+
+    class Meta:
+        db_table = 'consent_types'
+
+
+class DocumentConsent(models.Model):
+    document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='consents')
+    consent_type = models.ForeignKey('ConsentType', on_delete=models.CASCADE)
+    consent = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'consents'
+        unique_together = ('document', 'consent_type')

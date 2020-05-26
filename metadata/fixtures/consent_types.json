@@ -1,0 +1,31 @@
+[
+  {
+    "model": "metadata.consenttype",
+    "pk": 1,
+    "fields": {
+      "key": "five_years_after",
+      "type": "Consent for interview and all related data to be securely deposited for 5 years after project completion"
+    }
+  }, {
+    "model": "metadata.consenttype",
+    "pk": 2,
+    "fields": {
+      "key": "longer_than_five_years",
+      "type": "Consent for interview and all related data to be securely deposited for period longer than 5 years"
+    }
+  }, {
+    "model": "metadata.consenttype",
+    "pk": 3,
+    "fields": {
+      "key": "open_access",
+      "type": "Consent for interview data to become freely available on the Internet (Open access)"
+    }
+  }, {
+    "model": "metadata.consenttype",
+    "pk": 4,
+    "fields": {
+      "key": "personal_data",
+      "type": "Consent to use interviewed person’s name, institutional affiliation, other personal data"
+    }
+  }
+]
