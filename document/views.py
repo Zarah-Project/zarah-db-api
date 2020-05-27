@@ -12,16 +12,19 @@ from zarah_db_api.mixins.method_serializer_mixin import MethodSerializerMixin
 from zarah_db_api.parsers import PlainTextParser
 
 
-class DocumentList(generics.ListCreateAPIView):
+class DocumentList(MethodSerializerMixin, generics.ListCreateAPIView):
     queryset = Document.objects.all()
-    serializer_class = DocumentReadSerializer
+    method_serializer_classes = {
+        ('GET', ): DocumentReadSerializer,
+        ('PUT', 'POST', 'PATCH', 'DELETE'): DocumentWriteSerializer
+    }
 
 
 class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateAPIView):
     queryset = Document.objects.all()
     method_serializer_classes = {
         ('GET', ): DocumentReadSerializer,
-        ('PUT', 'PATCH', 'DELETE'): DocumentWriteSerializer
+        ('PUT', 'POST', 'PATCH', 'DELETE'): DocumentWriteSerializer
     }
 
 
