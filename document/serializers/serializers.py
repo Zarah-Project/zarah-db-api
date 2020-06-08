@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
@@ -117,7 +118,23 @@ class ClassificationReadSerializer(serializers.ModelSerializer):
         fields = ('id', 'category_key', 'full_name', 'field_type', 'text', 'field_id')
 
 
-class DocumentReadSerializer(serializers.ModelSerializer):
+class DocumentListSerializer(serializers.ModelSerializer):
+    created_by = serializers.SlugRelatedField(queryset=User.objects.all(), slug_field='username')
+    is_editable = serializers.SerializerMethodField()
+
+    def get_is_editable(self, obj):
+        user = self.context['request'].user
+        if obj.created_by:
+            return user.id == obj.created_by.id or user.is_staff or user.is_superuser
+        else:
+            return user.is_staff or user.is_superuser
+
+    class Meta:
+        model = Document
+        fields = ('id', 'title', 'is_editable', 'created_by')
+
+
+class DocumentReadFullSerializer(serializers.ModelSerializer):
     consents = DocumentConsentSerializer(many=True, required=False)
     dates = DocumentDateSerializer(many=True, required=False)
     keywords = DocumentKeywordSerializer(many=True, required=False)
@@ -131,6 +148,21 @@ class DocumentReadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = '__all__'
+
+
+class DocumentReadIndividualSerializer(serializers.ModelSerializer):
+    consents = DocumentConsentSerializer(many=True, required=False)
+    dates = DocumentDateSerializer(many=True, required=False)
+    people = PeopleReadSerializer(many=True, required=False, read_only=True)
+    places = PlaceReadSerializer(many=True, required=False, read_only=True)
+    organisations = OrganisationReadSerializer(many=True, required=False, read_only=True)
+    classifications = ClassificationReadSerializer(many=True, required=False, read_only=True)
+    explanations = ClassificationFurtherExplanationSerializer(many=True, required=False)
+    files = DocumentFileSerializer(many=True, required=False)
+
+    class Meta:
+        model = Document
+        exclude = ('abstract', 'additional_research')
 
 
 class DocumentWriteSerializer(WritableNestedModelSerializer):
