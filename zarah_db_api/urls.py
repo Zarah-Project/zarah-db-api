@@ -11,5 +11,9 @@ urlpatterns = [
 
     path('fp/', include('django_drf_filepond.urls')),
     path('admin/', admin.site.urls),
+
+    # JWT endpoints
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
   + static(settings.MEDIA_URL, document_root=settings.DJANGO_DRF_FILEPOND_FILE_STORE_PATH)

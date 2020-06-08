@@ -9,13 +9,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'djoser',
     'django_filters',
     'corsheaders',
     'django_drf_filepond',
 
     'authority_list',
     'document',
-    'metadata'
+    'metadata',
+    'users'
 ]
 
 MIDDLEWARE = [
