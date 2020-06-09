@@ -1,8 +1,9 @@
 from rest_framework import generics, filters
 
-from authority_list.models import Person, Place, OrganisationForm, OrganisationFormScale, Organisation
+from authority_list.models import Person, Place, OrganisationForm, OrganisationFormScale, Organisation, \
+    OrganisationGenderedMembership
 from authority_list.serializers import PersonSerializer, PlaceSerializer, OrganisationFormSerializer, \
-    OrganisationFormScaleSerializer, OrganisationSerializer
+    OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationGenderedMembershipSerializer
 
 
 class PersonList(generics.ListCreateAPIView):
@@ -29,6 +30,12 @@ class PlaceList(generics.ListCreateAPIView):
 class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
+
+
+class OrganisationGenderedMembershipList(generics.ListCreateAPIView):
+    pagination_class = None
+    queryset = OrganisationGenderedMembership.objects.all()
+    serializer_class = OrganisationGenderedMembershipSerializer
 
 
 class OrganisationFormList(generics.ListCreateAPIView):

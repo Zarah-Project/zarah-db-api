@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from authority_list.models import Person, PersonOtherName, PlaceOtherName, Place, Organisation, OrganisationForm, \
-    OrganisationFormScale
+    OrganisationFormScale, OrganisationGenderedMembership
 
 
 class PersonOtherNameSerializer(serializers.ModelSerializer):
@@ -45,6 +45,12 @@ class OrganisationFormSerializer(serializers.ModelSerializer):
 class OrganisationFormScaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrganisationFormScale
+        fields = '__all__'
+
+
+class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrganisationGenderedMembership
         fields = '__all__'
 
 

@@ -28,6 +28,8 @@ class Organisation(models.Model):
     organisation_form_text = models.TextField(blank=True)
     organisation_form_scale = models.ForeignKey('OrganisationFormScale', on_delete=models.PROTECT, blank=True, null=True)
     organisation_form_scale_text = models.TextField(blank=True)
+    organisation_gendered_membership = models.ForeignKey('OrganisationGenderedMembership', on_delete=models.PROTECT, blank=True, null=True)
+    organisation_gendered_membership_text = models.TextField(blank=True)
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -49,6 +51,13 @@ class OrganisationFormScale(models.Model):
 
     class Meta:
         db_table = 'organisation_form_scales'
+
+
+class OrganisationGenderedMembership(models.Model):
+    membership = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'organisation_gendered_memberships'
 
 
 # Places

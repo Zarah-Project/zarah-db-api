@@ -1,7 +1,7 @@
 from django.urls import path
 
 from authority_list.views import PersonList, PersonDetail, PlaceList, PlaceDetail, OrganisationList, OrganisationDetail, \
-    OrganisationFormList, OrganisationFormScaleList
+    OrganisationFormList, OrganisationFormScaleList, OrganisationGenderedMembershipList
 
 app_name = 'authority_list'
 
@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('organisation_forms/', OrganisationFormList.as_view(), name='organisation-form-list'),
     path('organisation_form_scales/', OrganisationFormScaleList.as_view(), name='organisation-form-scale-list'),
+    path('organisation_gendered_memberships/', OrganisationGenderedMembershipList.as_view(),
+         name='organisation-gendered-membership-list'),
 
     # People
     path('people/', PersonList.as_view(), name='person-list'),

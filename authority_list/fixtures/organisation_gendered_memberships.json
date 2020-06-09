@@ -1,0 +1,21 @@
+[
+  {
+    "model": "authority_list.organisationgenderedmembership",
+    "pk": 1,
+    "fields": {
+      "membership": "woman only"
+    }
+  }, {
+    "model": "authority_list.organisationgenderedmembership",
+    "pk": 2,
+    "fields": {
+      "membership": "mixed sex"
+    }
+  }, {
+    "model": "authority_list.organisationgenderedmembership",
+    "pk": 99,
+    "fields": {
+      "membership": "other"
+    }
+  }
+]
