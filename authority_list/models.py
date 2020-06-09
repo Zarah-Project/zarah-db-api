@@ -37,6 +37,9 @@ class Organisation(models.Model):
 class OrganisationForm(models.Model):
     form = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.form
+
     class Meta:
         db_table = 'organisation_forms'
 
