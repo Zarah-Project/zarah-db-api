@@ -23,4 +23,4 @@ class ClassificationFieldListSerializer(serializers.ModelSerializer):
 class ConsentFieldsListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsentType
-        fields = ('id', 'key', 'type')
+        fields = ('id', 'key', 'type', 'group')

@@ -41,7 +41,7 @@ class DocumentConsentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DocumentConsent
-        fields = ('id', 'consent_type', 'consent')
+        fields = ('id', 'consent_type', 'consent', 'consent_text')
 
 
 class ClassificationFurtherExplanationSerializer(serializers.ModelSerializer):

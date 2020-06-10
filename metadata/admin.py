@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from metadata.models import ClassificationField, ClassificationCategory
+from metadata.models import ClassificationField, ClassificationCategory, ConsentType
 
 
 class ClassificationFieldAdmin(admin.ModelAdmin):
@@ -13,5 +13,10 @@ class ClassificationCategoryAdmin(admin.ModelAdmin):
     pass
 
 
+class ConsentTypeAdmin(admin.ModelAdmin):
+    list_display = ('id', 'group', 'type', 'key')
+
+
 admin.site.register(ClassificationField, ClassificationFieldAdmin)
 admin.site.register(ClassificationCategory, ClassificationCategoryAdmin)
+admin.site.register(ConsentType, ConsentTypeAdmin)

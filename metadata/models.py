@@ -20,8 +20,8 @@ class ClassificationCategory(models.Model):
 
     class Meta:
         db_table = 'classification_categories'
-        verbose_name = 'Classification Category'
-        verbose_name_plural = 'Classification Categories'
+        verbose_name = 'Classification category'
+        verbose_name_plural = 'Classification categories'
 
 
 class ClassificationField(models.Model):
@@ -56,6 +56,7 @@ class ClassificationFurtherExplanation(models.Model):
 
 class ConsentType(models.Model):
     key = models.CharField(max_length=50)
+    group = models.CharField(max_length=50, default='interview')
     type = models.CharField(max_length=400)
 
     class Meta:
@@ -65,6 +66,7 @@ class ConsentType(models.Model):
 class DocumentConsent(models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='consents')
     consent_type = models.ForeignKey('ConsentType', on_delete=models.CASCADE)
+    consent_text = models.TextField(blank=True)
     consent = models.BooleanField(default=False)
 
     class Meta:
