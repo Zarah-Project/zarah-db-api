@@ -12,8 +12,6 @@ class DocumentSearch(ListAPIView):
     """
     Returns a list of all the documents.
     """
-    authentication_classes = tuple()
-    permission_classes = tuple()
     queryset = Document.objects.all()
     core = getattr(settings, "SOLR_CORE", "zarah")
 
@@ -54,6 +52,14 @@ class DocumentSearch(ListAPIView):
 
         try:
             response = searcher.search()
+            user = self.request.user
+
+            for doc in response.docs:
+                if 'created_by' in doc.keys():
+                    doc['is_editable'] = user.username == doc['created_by'] or user.is_staff or user.is_superuser
+                else:
+                    doc['is_editable'] = user.is_staff or user.is_superuser
+
         except SolrError as e:
             return Response(status=HTTP_400_BAD_REQUEST, data={'error': str(e)})
 
