@@ -63,17 +63,18 @@ class DocumentIndexer:
             for other_name in place.other_names.iterator():
                 self.doc['authority_search'].append(other_name.place_name)
 
-        zotero_data = json.loads(self.document.zotero_data)
+        if self.document.zotero_data:
+            zotero_data = json.loads(self.document.zotero_data)
 
-        # Zotero - Creators
-        if 'creators' in zotero_data.keys():
-            for creator in zotero_data['creators']:
-                self.doc['zotero_search'].append(creator['firstName'])
-                self.doc['zotero_search'].append(creator['lastName'])
+            # Zotero - Creators
+            if 'creators' in zotero_data.keys():
+                for creator in zotero_data['creators']:
+                    self.doc['zotero_search'].append(creator['firstName'])
+                    self.doc['zotero_search'].append(creator['lastName'])
 
-        # Zotero - Archive
-        if 'archive' in zotero_data.keys():
-            self.doc['zotero_search'].append(zotero_data['archive'])
+            # Zotero - Archive
+            if 'archive' in zotero_data.keys():
+                self.doc['zotero_search'].append(zotero_data['archive'])
 
         # Sort
         self.doc['title_sort'] = self.doc['title']

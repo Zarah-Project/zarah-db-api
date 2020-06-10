@@ -19,6 +19,13 @@ class DocumentSearch(ListAPIView):
         limit = request.query_params.get('limit', 10)
         offset = request.query_params.get('offset', 0)
 
+        query = request.query_params.get('query', '')
+
+        if query != '':
+            ordering = request.query_params.get('ordering', '-score')
+        else:
+            ordering = request.query_params.get('ordering', '-id')
+
         filters = []
         filters_or = []
         date_filters = []
@@ -29,8 +36,8 @@ class DocumentSearch(ListAPIView):
             'authority_search^2.5',
         ]
         params = {
-            'search': request.query_params.get('query', ''),
-            'ordering': request.query_params.get('ordering', '-score'),
+            'search': query,
+            'ordering': ordering,
             'qf': qf,
             'fl': 'id,title,created_by',
             'facet': True,
