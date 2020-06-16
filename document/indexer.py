@@ -82,13 +82,13 @@ class DocumentIndexer:
 
         # Classifications
         for keyword in self.document.triggering_factor_keywords.iterator():
-            self.doc['classification_search'].append(keyword['keyword'])
+            self.doc['classification_search'].append(keyword.keyword)
 
         for keyword in self.document.keywords.iterator():
-            self.doc['classification_search'].append(keyword['keyword'])
+            self.doc['classification_search'].append(keyword.keyword)
 
         for date in self.document.dates.iterator():
-            self.doc['classification_search'].append(date['event'])
+            self.doc['classification_search'].append(date.event)
 
         # Sort
         self.doc['title_sort'] = self.doc['title']
