@@ -32,8 +32,10 @@ class DocumentSearch(ListAPIView):
 
         qf = [
             'title_search^5',
+            'full_text^3',
             'zotero_search^2.5',
             'authority_search^2.5',
+            'classification_search^2.5',
         ]
         params = {
             'search': query,

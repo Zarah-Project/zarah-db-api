@@ -25,6 +25,7 @@ class DocumentIndexer:
             'authority_search': [],
             'classification_search': [],
             'zotero_search': [],
+            'full_text': [],
 
             # Facet fields
             'created_by_facet': None,
@@ -76,9 +77,21 @@ class DocumentIndexer:
             if 'archive' in zotero_data.keys():
                 self.doc['zotero_search'].append(zotero_data['archive'])
 
+        self.doc['full_text'] = self.document.abstract
+        self.doc['full_text'] = self.document.summary
+
+        # Classifications
+        for keyword in self.document.triggering_factor_keywords.iterator():
+            self.doc['classification_search'].append(keyword['keyword'])
+
+        for keyword in self.document.keywords.iterator():
+            self.doc['classification_search'].append(keyword['keyword'])
+
+        for date in self.document.dates.iterator():
+            self.doc['classification_search'].append(date['event'])
+
         # Sort
         self.doc['title_sort'] = self.doc['title']
 
         self.doc['authority_search'] = ' '.join(self.doc['authority_search'])
         self.doc['zotero_search'] = ' '.join(self.doc['zotero_search'])
-        pass
