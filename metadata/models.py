@@ -47,7 +47,7 @@ class ClassificationField(models.Model):
 class ClassificationFurtherExplanation(models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='explanations')
     category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True)
 
     class Meta:
         db_table = 'classification_further_explanations'
