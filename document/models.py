@@ -8,6 +8,7 @@ from django_date_extensions.fields import ApproximateDateField
 class Document(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     record_type = models.CharField(max_length=20, default='default')
+    attachment_type = models.CharField(max_length=20, default='default')
     citation_link = models.TextField(blank=True)
     title = models.CharField(max_length=400)
     item_type = models.CharField(max_length=50, blank=True)
