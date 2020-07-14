@@ -1,4 +1,9 @@
 import json
+import os
+
+import tika
+from django_drf_filepond.api import get_stored_upload, get_stored_upload_file_data
+from tika import parser
 
 import pysolr
 from django.conf import settings
@@ -36,6 +41,7 @@ class DocumentIndexer:
 
     def index(self):
         self._index_record()
+        self._index_file_content()
         try:
             self.solr.add([self.doc], commit=True)
             print('Indexed record no. %s!' % self.doc['id'])
@@ -77,8 +83,8 @@ class DocumentIndexer:
             if 'archive' in zotero_data.keys():
                 self.doc['zotero_search'].append(zotero_data['archive'])
 
-        self.doc['full_text'] = self.document.abstract
-        self.doc['full_text'] = self.document.summary
+        self.doc['full_text'].append(self.document.abstract)
+        self.doc['full_text'].append(self.document.summary)
 
         # Classifications
         for keyword in self.document.triggering_factor_keywords.iterator():
@@ -95,3 +101,15 @@ class DocumentIndexer:
 
         self.doc['authority_search'] = ' '.join(self.doc['authority_search'])
         self.doc['zotero_search'] = ' '.join(self.doc['zotero_search'])
+
+    def _index_file_content(self):
+        tika.TikaClientOnly = True
+        for file in self.document.files.iterator():
+            if file.file_id:
+                try:
+                    su = get_stored_upload(file.file_id)
+                    (filename, bytes_io) = get_stored_upload_file_data(su)
+                    parsed = parser.from_file(os.path.join(settings.DJANGO_DRF_FILEPOND_FILE_STORE_PATH, filename))
+                    self.doc['full_text'].append(parsed["content"])
+                except Exception as e:
+                    print(e)
