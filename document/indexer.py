@@ -2,6 +2,8 @@ import json
 import os
 
 import tika
+tika.TikaClientOnly = True
+
 from django_drf_filepond.api import get_stored_upload, get_stored_upload_file_data
 from tika import parser
 
@@ -83,6 +85,10 @@ class DocumentIndexer:
             if 'archive' in zotero_data.keys():
                 self.doc['zotero_search'].append(zotero_data['archive'])
 
+            # Zotero - Archive Location
+            if 'archiveLocation' in zotero_data.keys():
+                self.doc['zotero_search'].append(zotero_data['archiveLocation'])
+
         self.doc['full_text'].append(self.document.abstract)
         self.doc['full_text'].append(self.document.summary)
 
@@ -96,6 +102,9 @@ class DocumentIndexer:
         for date in self.document.dates.iterator():
             self.doc['classification_search'].append(date.event)
 
+        for explanation in self.document.explanations.iterator():
+            self.doc['full_text'].append(explanation.explanation)
+
         # Sort
         self.doc['title_sort'] = self.doc['title']
 
@@ -103,7 +112,6 @@ class DocumentIndexer:
         self.doc['zotero_search'] = ' '.join(self.doc['zotero_search'])
 
     def _index_file_content(self):
-        tika.TikaClientOnly = True
         for file in self.document.files.iterator():
             if file.file_id:
                 try:
