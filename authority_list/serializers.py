@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from authority_list.models import Person, PersonOtherName, PlaceOtherName, Place, Organisation, OrganisationForm, \
-    OrganisationFormScale, OrganisationGenderedMembership
+    OrganisationFormScale, OrganisationGenderedMembership, Event
+from zarah_db_api.fields import ApproximateDateSerializerField
 
 
 class PersonOtherNameSerializer(serializers.ModelSerializer):
@@ -66,3 +67,12 @@ class OrganisationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organisation
         fields = '__all__'
+
+
+class EventSerializer(WritableNestedModelSerializer):
+    date_from = ApproximateDateSerializerField()
+    date_to = ApproximateDateSerializerField(required=False)
+
+    class Meta:
+        model = Event
+        fields = ('id', 'date_from', 'date_to', 'event', 'event_full')

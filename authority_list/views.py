@@ -1,9 +1,9 @@
 from rest_framework import generics, filters
 
 from authority_list.models import Person, Place, OrganisationForm, OrganisationFormScale, Organisation, \
-    OrganisationGenderedMembership
+    OrganisationGenderedMembership, Event
 from authority_list.serializers import PersonSerializer, PlaceSerializer, OrganisationFormSerializer, \
-    OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationGenderedMembershipSerializer
+    OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationGenderedMembershipSerializer, EventSerializer
 
 
 class PersonList(generics.ListCreateAPIView):
@@ -65,3 +65,16 @@ class OrganisationList(generics.ListCreateAPIView):
 class OrganisationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Organisation.objects.all()
     serializer_class = OrganisationSerializer
+
+
+class EventList(generics.ListCreateAPIView):
+    pagination_class = None
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['event', 'date_from', 'date_to']
+
+
+class EventDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer

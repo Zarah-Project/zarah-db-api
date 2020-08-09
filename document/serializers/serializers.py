@@ -3,19 +3,9 @@ from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
 from authority_list.models import Organisation, Place, Person
-from document.models import Document, DocumentFile, DocumentTriggeringFactorKeyword, DocumentKeyword, DocumentDate
+from document.models import Document, DocumentFile, DocumentTriggeringFactorKeyword, DocumentKeyword
 from metadata.models import DocumentConsent, ClassificationFurtherExplanation, ClassificationCategory, Classification, \
     ConsentType
-from zarah_db_api.fields import ApproximateDateSerializerField
-
-
-class DocumentDateSerializer(serializers.ModelSerializer):
-    date_from = ApproximateDateSerializerField()
-    date_to = ApproximateDateSerializerField(required=False, allow_null=True)
-
-    class Meta:
-        model = DocumentDate
-        fields = ('id', 'date_from', 'date_to', 'event')
 
 
 class DocumentKeywordSerializer(serializers.ModelSerializer):
@@ -136,7 +126,6 @@ class DocumentListSerializer(serializers.ModelSerializer):
 
 class DocumentReadFullSerializer(serializers.ModelSerializer):
     consents = DocumentConsentSerializer(many=True, required=False)
-    dates = DocumentDateSerializer(many=True, required=False)
     keywords = DocumentKeywordSerializer(many=True, required=False)
     people = PeopleReadSerializer(many=True, required=False, read_only=True)
     places = PlaceReadSerializer(many=True, required=False, read_only=True)
@@ -152,7 +141,6 @@ class DocumentReadFullSerializer(serializers.ModelSerializer):
 
 class DocumentReadIndividualSerializer(serializers.ModelSerializer):
     consents = DocumentConsentSerializer(many=True, required=False)
-    dates = DocumentDateSerializer(many=True, required=False)
     people = PeopleReadSerializer(many=True, required=False, read_only=True)
     places = PlaceReadSerializer(many=True, required=False, read_only=True)
     organisations = OrganisationReadSerializer(many=True, required=False, read_only=True)
@@ -167,7 +155,6 @@ class DocumentReadIndividualSerializer(serializers.ModelSerializer):
 
 class DocumentWriteSerializer(WritableNestedModelSerializer):
     consents = DocumentConsentSerializer(many=True, required=False)
-    dates = DocumentDateSerializer(many=True, required=False)
     keywords = DocumentKeywordSerializer(many=True, required=False)
     triggering_factor_keywords = DocumentTriggeringFactorKeywordSerializer(many=True, required=False)
     files = DocumentFileSerializer(many=True, required=False)

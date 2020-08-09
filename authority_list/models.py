@@ -2,6 +2,9 @@ from django.db import models
 
 
 # People
+from django_date_extensions.fields import ApproximateDateField
+
+
 class Person(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -75,3 +78,21 @@ class PlaceOtherName(models.Model):
 
     class Meta:
         db_table = 'place_other_names'
+
+
+# Dates
+class Event(models.Model):
+    date_from = ApproximateDateField()
+    date_to = ApproximateDateField(blank=True)
+    event = models.CharField(max_length=500, blank=True)
+
+    @property
+    def event_full(self):
+        if self.date_to:
+            value = "%s - %s" % (self.date_from, self.date_to)
+        else:
+            value = self.date_from
+        return "%s (%s)" % (value, self.event)
+
+    class Meta:
+        db_table = 'events'

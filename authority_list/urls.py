@@ -1,7 +1,7 @@
 from django.urls import path
 
 from authority_list.views import PersonList, PersonDetail, PlaceList, PlaceDetail, OrganisationList, OrganisationDetail, \
-    OrganisationFormList, OrganisationFormScaleList, OrganisationGenderedMembershipList
+    OrganisationFormList, OrganisationFormScaleList, OrganisationGenderedMembershipList, EventList, EventDetail
 
 app_name = 'authority_list'
 
@@ -22,4 +22,8 @@ urlpatterns = [
     # Place
     path('places/', PlaceList.as_view(), name='place-list'),
     path('places/<int:pk>/', PlaceDetail.as_view(), name='place-detail'),
+
+    # Place
+    path('events/', EventList.as_view(), name='event-list'),
+    path('events/<int:pk>/', EventDetail.as_view(), name='event-detail'),
 ]
