@@ -66,6 +66,7 @@ class OrganisationGenderedMembership(models.Model):
 # Places
 class Place(models.Model):
     place_name = models.CharField(max_length=200)
+    country = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
 
     class Meta:
@@ -96,3 +97,4 @@ class Event(models.Model):
 
     class Meta:
         db_table = 'events'
+        ordering = ['date_from', 'date_to', 'event']
