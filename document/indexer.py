@@ -50,6 +50,10 @@ class DocumentIndexer:
         except pysolr.SolrError as e:
             print('Error with record no. %s! Error: %s' % (self.doc['id'], e))
 
+    def remove_record(self):
+        self.solr.delete(self.document.id)
+        self.solr.commit()
+
     def _index_record(self):
         self.doc['id'] = self.document.id
         self.doc['title'] = self.document.title

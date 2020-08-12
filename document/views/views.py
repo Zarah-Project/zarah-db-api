@@ -40,7 +40,7 @@ class DocumentList(MethodSerializerMixin, generics.ListCreateAPIView):
         serializer.save(created_by=self.request.user)
 
 
-class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateAPIView):
+class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
     permission_classes = [IsCreatorOrReadOnly]
 

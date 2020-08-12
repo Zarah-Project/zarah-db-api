@@ -14,6 +14,11 @@ class PersonOtherNameSerializer(serializers.ModelSerializer):
 class PersonSerializer(WritableNestedModelSerializer):
     full_name = serializers.SerializerMethodField(read_only=True)
     other_names = PersonOtherNameSerializer(many=True, required=False)
+    is_removable = serializers.SerializerMethodField()
+
+    def get_is_removable(self, obj):
+        user = self.context['request'].user
+        return user.is_staff or user.is_superuser
 
     def get_full_name(self, obj):
         return "%s %s" % (obj.first_name, obj.last_name)
@@ -31,6 +36,11 @@ class PlaceOtherNameSerializer(serializers.ModelSerializer):
 
 class PlaceSerializer(WritableNestedModelSerializer):
     other_names = PlaceOtherNameSerializer(many=True, required=False)
+    is_removable = serializers.SerializerMethodField()
+
+    def get_is_removable(self, obj):
+        user = self.context['request'].user
+        return user.is_staff or user.is_superuser
 
     class Meta:
         model = Place
@@ -57,6 +67,11 @@ class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
 
 class OrganisationSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField(read_only=True)
+    is_removable = serializers.SerializerMethodField()
+
+    def get_is_removable(self, obj):
+        user = self.context['request'].user
+        return user.is_staff or user.is_superuser
 
     def get_full_name(self, obj):
         if obj.acronym:
@@ -72,7 +87,12 @@ class OrganisationSerializer(serializers.ModelSerializer):
 class EventSerializer(WritableNestedModelSerializer):
     date_from = ApproximateDateSerializerField()
     date_to = ApproximateDateSerializerField(required=False)
+    is_removable = serializers.SerializerMethodField()
+
+    def get_is_removable(self, obj):
+        user = self.context['request'].user
+        return user.is_staff or user.is_superuser
 
     class Meta:
         model = Event
-        fields = ('id', 'date_from', 'date_to', 'event', 'event_full')
+        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'is_removable')
