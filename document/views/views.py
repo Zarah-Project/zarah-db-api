@@ -6,6 +6,8 @@ from document.serializers.serializers import DocumentWriteSerializer, DocumentRe
     DocumentListSerializer, DocumentReadIndividualSerializer
 from document.serializers.serializers_public import DocumentReadPublicSerializer
 from zarah_db_api.mixins.method_serializer_mixin import MethodSerializerMixin
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 # Public views
@@ -17,6 +19,9 @@ class DocumentPublicList(generics.ListAPIView):
     serializer_class = DocumentListSerializer
     authentication_classes = []
     permission_classes = []
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['people', 'places', 'organisations']
+    ordering_fields = ['title']
 
 
 class DocumentPublicDetail(generics.RetrieveAPIView):
@@ -35,6 +40,9 @@ class DocumentList(MethodSerializerMixin, generics.ListCreateAPIView):
         ('GET', ): DocumentListSerializer,
         ('PUT', 'POST', 'PATCH', 'DELETE'): DocumentWriteSerializer
     }
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['people', 'places', 'organisations']
+    ordering_fields = ['title']
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)

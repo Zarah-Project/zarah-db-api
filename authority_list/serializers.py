@@ -2,6 +2,7 @@ from rest_framework import serializers
 from drf_writable_nested.serializers import WritableNestedModelSerializer
 from authority_list.models import Person, PersonOtherName, PlaceOtherName, Place, Organisation, OrganisationForm, \
     OrganisationFormScale, OrganisationGenderedMembership, Event
+from document.models import Document
 from zarah_db_api.fields import ApproximateDateSerializerField
 
 
@@ -15,6 +16,7 @@ class PersonSerializer(WritableNestedModelSerializer):
     full_name = serializers.SerializerMethodField(read_only=True)
     other_names = PersonOtherNameSerializer(many=True, required=False)
     is_removable = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
         user = self.context['request'].user
@@ -22,6 +24,9 @@ class PersonSerializer(WritableNestedModelSerializer):
 
     def get_full_name(self, obj):
         return "%s %s" % (obj.first_name, obj.last_name)
+
+    def get_used(self, obj):
+        return Document.objects.filter(people=obj).count()
 
     class Meta:
         model = Person
@@ -37,10 +42,14 @@ class PlaceOtherNameSerializer(serializers.ModelSerializer):
 class PlaceSerializer(WritableNestedModelSerializer):
     other_names = PlaceOtherNameSerializer(many=True, required=False)
     is_removable = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
         user = self.context['request'].user
         return user.is_staff or user.is_superuser
+
+    def get_used(self, obj):
+        return Document.objects.filter(places=obj).count()
 
     class Meta:
         model = Place
@@ -68,6 +77,7 @@ class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
 class OrganisationSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField(read_only=True)
     is_removable = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
         user = self.context['request'].user
@@ -79,6 +89,9 @@ class OrganisationSerializer(serializers.ModelSerializer):
         else:
             return obj.name
 
+    def get_used(self, obj):
+        return Document.objects.filter(organisations=obj).count()
+
     class Meta:
         model = Organisation
         fields = '__all__'
@@ -88,10 +101,14 @@ class EventSerializer(WritableNestedModelSerializer):
     date_from = ApproximateDateSerializerField()
     date_to = ApproximateDateSerializerField(required=False)
     is_removable = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
         user = self.context['request'].user
         return user.is_staff or user.is_superuser
+
+    def get_used(self, obj):
+        return Document.objects.filter(events=obj).count()
 
     class Meta:
         model = Event
