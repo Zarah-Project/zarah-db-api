@@ -1,6 +1,9 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from document.indexer import DocumentIndexer
 from document.models import Document
 from document.serializers.serializers import DocumentWriteSerializer, DocumentReadFullSerializer, \
     DocumentListSerializer, DocumentReadIndividualSerializer
@@ -48,9 +51,26 @@ class DocumentList(MethodSerializerMixin, generics.ListCreateAPIView):
         serializer.save(created_by=self.request.user)
 
 
+class DocumentClone(APIView):
+    def post(self, request, *args, **kwargs):
+        document_id = self.kwargs.get('pk', None)
+        document = get_object_or_404(Document, pk=document_id)
+        clone = document.make_clone()
+
+        clone.title = '[COPY] ' + clone.title
+        clone.created_by = self.request.user
+
+        clone.save()
+        return Response(status=status.HTTP_200_OK)
+
+
 class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = Document.objects.all()
     permission_classes = [IsCreatorOrReadOnly]
+
+    def perform_destroy(self, instance):
+        indexer = DocumentIndexer(instance)
+        indexer.remove_record()
 
     def get_serializer_class(self):
         method = self.request._request.method
