@@ -1,10 +1,13 @@
 from django.db import models
+from model_clone import CloneMixin
 
 
-class Classification(models.Model):
+class Classification(CloneMixin, models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='classifications')
     classification_field = models.ForeignKey('ClassificationField', on_delete=models.PROTECT)
     classification_other_text = models.TextField(blank=True)
+
+    _clone_many_to_one_or_one_to_many_fields = ['classification_field']
 
     class Meta:
         db_table = 'classifications'
@@ -44,10 +47,12 @@ class ClassificationField(models.Model):
         db_table = 'classification_fields'
 
 
-class ClassificationFurtherExplanation(models.Model):
+class ClassificationFurtherExplanation(CloneMixin, models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='explanations')
     category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
     explanation = models.TextField(blank=True)
+
+    _clone_many_to_one_or_one_to_many_fields = ['category']
 
     class Meta:
         db_table = 'classification_further_explanations'
@@ -63,11 +68,13 @@ class ConsentType(models.Model):
         db_table = 'consent_types'
 
 
-class DocumentConsent(models.Model):
+class DocumentConsent(CloneMixin, models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='consents')
     consent_type = models.ForeignKey('ConsentType', on_delete=models.CASCADE)
     consent_text = models.TextField(blank=True)
     consent = models.BooleanField(default=False)
+
+    _clone_many_to_one_or_one_to_many_fields = ['consent_type']
 
     class Meta:
         db_table = 'consents'

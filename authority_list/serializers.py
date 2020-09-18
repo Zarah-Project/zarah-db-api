@@ -112,4 +112,4 @@ class EventSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'is_removable')
+        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'used', 'is_removable')
