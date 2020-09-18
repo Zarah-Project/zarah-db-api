@@ -76,6 +76,9 @@ class DocumentIndexer:
             for other_name in place.other_names.iterator():
                 self.doc['authority_search'].append(other_name.place_name)
 
+        for event in self.document.events.iterator():
+            self.doc['authority_search'].append(event.event)
+
         if self.document.zotero_data:
             zotero_data = json.loads(self.document.zotero_data)
 
@@ -102,9 +105,6 @@ class DocumentIndexer:
 
         for keyword in self.document.keywords.iterator():
             self.doc['classification_search'].append(keyword.keyword)
-
-        for date in self.document.dates.iterator():
-            self.doc['classification_search'].append(date.event)
 
         for explanation in self.document.explanations.iterator():
             self.doc['full_text'].append(explanation.explanation)
