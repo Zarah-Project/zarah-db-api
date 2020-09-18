@@ -26,6 +26,9 @@ class DocumentIndexer:
             'id': None,
             'title': None,
             'created_by': None,
+            'item_type': None,
+            'language': None,
+            'year': None,
 
             # Search fields
             'title_search': [],
@@ -95,6 +98,18 @@ class DocumentIndexer:
             # Zotero - Archive Location
             if 'archiveLocation' in zotero_data.keys():
                 self.doc['zotero_search'].append(zotero_data['archiveLocation'])
+
+            # Zotero - Language
+            if 'language' in zotero_data.keys():
+                self.doc['language'] = zotero_data['language']
+
+            # Zotero - Item Type
+            if 'itemType' in zotero_data.keys():
+                self.doc['item_type'] = zotero_data['itemType']
+
+            # Zotero - Item Type
+            if 'date' in zotero_data.keys():
+                self.doc['year'] = zotero_data['date']
 
         self.doc['full_text'].append(self.document.abstract)
         self.doc['full_text'].append(self.document.summary)
