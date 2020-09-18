@@ -24,7 +24,7 @@ class DocumentSearch(ListAPIView):
         if query != '':
             ordering = request.query_params.get('ordering', '-score')
         else:
-            ordering = request.query_params.get('ordering', '-id')
+            ordering = request.query_params.get('ordering', 'title_sort')
 
         filters = []
         filters_or = []
