@@ -40,8 +40,8 @@ class Document(CloneMixin, models.Model):
 class DocumentFile(models.Model):
     document = models.ForeignKey('Document', on_delete=models.CASCADE, related_name='files')
     sequence = models.IntegerField(blank=True, null=True)
-    file_id = models.CharField(max_length=30, default='')
-    file_url = models.CharField(max_length=200, default='')
+    file_id = models.CharField(max_length=30, default='', blank=True)
+    file_url = models.CharField(max_length=200, default='', blank=True)
     file = models.FileField(blank=True, null=True)
 
     class Meta:
