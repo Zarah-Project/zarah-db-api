@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
 
-from authority_list.models import Organisation, Place, Person
+from authority_list.models import Organisation, Place, Person, Event
 from document.models import Document, DocumentFile, DocumentTriggeringFactorKeyword, DocumentKeyword
 from metadata.models import DocumentConsent, ClassificationFurtherExplanation, ClassificationCategory, Classification, \
     ConsentType
@@ -54,6 +54,18 @@ class OrganisationReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organisation
+        fields = ('value', 'label')
+
+
+class EventReadSerializer(serializers.ModelSerializer):
+    value = serializers.IntegerField(source='pk', read_only=True)
+    label = serializers.SerializerMethodField()
+
+    def get_label(self, obj):
+        return "%s" % obj.event_full
+
+    class Meta:
+        model = Event
         fields = ('value', 'label')
 
 
@@ -130,6 +142,7 @@ class DocumentReadFullSerializer(serializers.ModelSerializer):
     people = PeopleReadSerializer(many=True, required=False, read_only=True)
     places = PlaceReadSerializer(many=True, required=False, read_only=True)
     organisations = OrganisationReadSerializer(many=True, required=False, read_only=True)
+    events = EventReadSerializer(many=True, required=False, read_only=True)
     classifications = ClassificationReadSerializer(many=True, required=False, read_only=True)
     explanations = ClassificationFurtherExplanationSerializer(many=True, required=False)
     files = DocumentFileSerializer(many=True, required=False)
@@ -144,6 +157,7 @@ class DocumentReadIndividualSerializer(serializers.ModelSerializer):
     people = PeopleReadSerializer(many=True, required=False, read_only=True)
     places = PlaceReadSerializer(many=True, required=False, read_only=True)
     organisations = OrganisationReadSerializer(many=True, required=False, read_only=True)
+    events = EventReadSerializer(many=True, required=False, read_only=True)
     classifications = ClassificationReadSerializer(many=True, required=False, read_only=True)
     explanations = ClassificationFurtherExplanationSerializer(many=True, required=False)
     files = DocumentFileSerializer(many=True, required=False)
