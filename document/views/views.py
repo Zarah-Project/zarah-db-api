@@ -44,7 +44,7 @@ class DocumentList(MethodSerializerMixin, generics.ListCreateAPIView):
         ('PUT', 'POST', 'PATCH', 'DELETE'): DocumentWriteSerializer
     }
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_fields = ['people', 'places', 'organisations']
+    filterset_fields = ['people', 'places', 'organisations', 'events']
     ordering_fields = ['title']
 
     def perform_create(self, serializer):
