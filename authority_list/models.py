@@ -10,6 +10,10 @@ class Person(models.Model):
     last_name = models.CharField(max_length=200)
     notes = models.TextField(blank=True, null=True)
 
+    @property
+    def full_name(self):
+        return "%s, %s" % (self.last_name, self.first_name)
+
     class Meta:
         db_table = 'people'
 

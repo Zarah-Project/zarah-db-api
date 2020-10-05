@@ -13,7 +13,6 @@ class PersonOtherNameSerializer(serializers.ModelSerializer):
 
 
 class PersonSerializer(WritableNestedModelSerializer):
-    full_name = serializers.SerializerMethodField(read_only=True)
     other_names = PersonOtherNameSerializer(many=True, required=False)
     is_removable = serializers.SerializerMethodField()
     used = serializers.SerializerMethodField()
@@ -22,15 +21,12 @@ class PersonSerializer(WritableNestedModelSerializer):
         user = self.context['request'].user
         return user.is_staff or user.is_superuser
 
-    def get_full_name(self, obj):
-        return "%s %s" % (obj.first_name, obj.last_name)
-
     def get_used(self, obj):
         return Document.objects.filter(people=obj).count()
 
     class Meta:
         model = Person
-        fields = '__all__'
+        fields = ['id', 'full_name', 'first_name', 'last_name', 'other_names', 'notes', 'is_removable', 'used']
 
 
 class PlaceOtherNameSerializer(serializers.ModelSerializer):
@@ -75,7 +71,6 @@ class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField(read_only=True)
     is_removable = serializers.SerializerMethodField()
     used = serializers.SerializerMethodField()
 
