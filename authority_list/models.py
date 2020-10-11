@@ -9,6 +9,7 @@ class Person(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     notes = models.TextField(blank=True, null=True)
+    internal_notes = models.TextField(blank=True, null=True)
 
     @property
     def full_name(self):
@@ -38,6 +39,7 @@ class Organisation(models.Model):
     organisation_gendered_membership = models.ForeignKey('OrganisationGenderedMembership', on_delete=models.PROTECT, blank=True, null=True)
     organisation_gendered_membership_text = models.TextField(blank=True)
     notes = models.TextField(blank=True, null=True)
+    internal_notes = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'organisations'
@@ -72,6 +74,7 @@ class Place(models.Model):
     place_name = models.CharField(max_length=200)
     country = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    internal_notes = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'places'
@@ -90,6 +93,7 @@ class Event(models.Model):
     date_from = ApproximateDateField()
     date_to = ApproximateDateField(blank=True)
     event = models.CharField(max_length=500, blank=True)
+    internal_notes = models.TextField(blank=True, null=True)
 
     @property
     def event_full(self):

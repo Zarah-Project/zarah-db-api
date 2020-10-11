@@ -26,7 +26,8 @@ class PersonSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Person
-        fields = ['id', 'full_name', 'first_name', 'last_name', 'other_names', 'notes', 'is_removable', 'used']
+        fields = ['id', 'full_name', 'first_name', 'last_name', 'other_names', 'notes', 'internal_notes',
+                  'is_removable', 'used']
 
 
 class PlaceOtherNameSerializer(serializers.ModelSerializer):
@@ -71,6 +72,7 @@ class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
     is_removable = serializers.SerializerMethodField()
     used = serializers.SerializerMethodField()
 
@@ -107,4 +109,4 @@ class EventSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'used', 'is_removable')
+        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'internal_notes', 'used', 'is_removable')
