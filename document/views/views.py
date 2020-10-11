@@ -71,6 +71,7 @@ class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateDestroyAPIVie
     def perform_destroy(self, instance):
         indexer = DocumentIndexer(instance)
         indexer.remove_record()
+        instance.delete()
 
     def get_serializer_class(self):
         method = self.request._request.method
