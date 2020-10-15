@@ -1,0 +1,39 @@
+[
+  {
+    "model": "authority_list.organisationformscale",
+    "pk": 1,
+    "fields": {
+      "scale": "Local"
+    }
+  }, {
+    "model": "authority_list.organisationformscale",
+    "pk": 2,
+    "fields": {
+      "scale": "Regional"
+    }
+  }, {
+    "model": "authority_list.organisationformscale",
+    "pk": 3,
+    "fields": {
+      "scale": "National"
+    }
+  }, {
+    "model": "authority_list.organisationformscale",
+    "pk": 4,
+    "fields": {
+      "scale": "Transnational"
+    }
+  }, {
+    "model": "authority_list.organisationformscale",
+    "pk": 5,
+    "fields": {
+      "scale": "Empire"
+    }
+  }, {
+    "model": "authority_list.organisationformscale",
+    "pk": 99,
+    "fields": {
+      "scale": "Other"
+    }
+  }
+]

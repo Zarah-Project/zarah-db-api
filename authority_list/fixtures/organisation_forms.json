@@ -1,0 +1,69 @@
+[
+  {
+    "model": "authority_list.organisationform",
+    "pk": 1,
+    "fields": {
+      "form": "Trade union"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 2,
+    "fields": {
+      "form": "Party"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 3,
+    "fields": {
+      "form": "Informal collective/group"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 4,
+    "fields": {
+      "form": "Solidarity network"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 5,
+    "fields": {
+      "form": "Cooperative"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 6,
+    "fields": {
+      "form": "Religious group"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 7,
+    "fields": {
+      "form": "Non-governmental organisation"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 8,
+    "fields": {
+      "form": "Governmental institution/ State Instituion – \"labour within the state\""
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 9,
+    "fields": {
+      "form": "International Non-governmental Institution"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 10,
+    "fields": {
+      "form": "International Governmental Institution"
+    }
+  }, {
+    "model": "authority_list.organisationform",
+    "pk": 99,
+    "fields": {
+      "form": "Other"
+    }
+  }
+]

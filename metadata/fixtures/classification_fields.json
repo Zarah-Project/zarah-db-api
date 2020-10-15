@@ -1,0 +1,1402 @@
+[
+{
+    "model": "metadata.classificationfield",
+    "pk": 1,
+    "fields": {
+        "parent": null,
+        "category": 1,
+        "field_type": "group",
+        "field": "Classical"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 2,
+    "fields": {
+        "parent": 1,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Strike"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 3,
+    "fields": {
+        "parent": 1,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Long-term mobilization"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 4,
+    "fields": {
+        "parent": 1,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Issue-based mobilization/campaigns"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 5,
+    "fields": {
+        "parent": 1,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Knowledge production (reports etc.)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 6,
+    "fields": {
+        "parent": 1,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Policy-making; \"Activism within the state\""
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 7,
+    "fields": {
+        "parent": null,
+        "category": 1,
+        "field_type": "group",
+        "field": "Alternative"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 8,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Everyday resistance"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 9,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Sit-ins"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 10,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Temporary production halt"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 11,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Boycott"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 12,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Solidarity and fundraising campaigns"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 13,
+    "fields": {
+        "parent": 7,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Educational and training programs"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 14,
+    "fields": {
+        "parent": null,
+        "category": 1,
+        "field_type": "tag",
+        "field": "Non-activism/ Choice not to act."
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 15,
+    "fields": {
+        "parent": null,
+        "category": 1,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 16,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "tag",
+        "field": "Legal"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 17,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "tag",
+        "field": "Regional"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 18,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "tag",
+        "field": "National"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 19,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "tag",
+        "field": "Transnational"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 20,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "tag",
+        "field": "Empire"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 21,
+    "fields": {
+        "parent": null,
+        "category": 2,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 22,
+    "fields": {
+        "parent": null,
+        "category": 3,
+        "field_type": "group",
+        "field": "Income and wage justice"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 23,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "tag",
+        "field": "equal wage for work of equal value"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 24,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "group",
+        "field": "sufficient wage"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 25,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "tag",
+        "field": "rightful wage"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 26,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "tag",
+        "field": "wage increase"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 27,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "tag",
+        "field": "equal pay for equal work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 28,
+    "fields": {
+        "parent": 22,
+        "category": 3,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 29,
+    "fields": {
+        "parent": null,
+        "category": 3,
+        "field_type": "group",
+        "field": "Right to work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 30,
+    "fields": {
+        "parent": 29,
+        "category": 3,
+        "field_type": "tag",
+        "field": "equal access to better paid jobs, positions and occupations"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 31,
+    "fields": {
+        "parent": 29,
+        "category": 3,
+        "field_type": "tag",
+        "field": "equal access to education, training and other career advancing opportunities"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 32,
+    "fields": {
+        "parent": 29,
+        "category": 3,
+        "field_type": "tag",
+        "field": "participation in decision-making processes (regarding distribution of work and income in factories and institutions)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 33,
+    "fields": {
+        "parent": 29,
+        "category": 3,
+        "field_type": "tag",
+        "field": "delinking of employment from marital/family status"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 34,
+    "fields": {
+        "parent": 29,
+        "category": 3,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 35,
+    "fields": {
+        "parent": null,
+        "category": 3,
+        "field_type": "group",
+        "field": "Social rights, welfare politics, politics of the double day"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 36,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "tag",
+        "field": "demands for alleviating/resolving tensions between family work and income-generating work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 37,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "tag",
+        "field": "negotiating priorities, creating preconditions for development of public services (esp. child care)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 38,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "tag",
+        "field": "negotiating priorities, creating preconditions for development of social welfare (incl. social, health and disability insurance)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 39,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "tag",
+        "field": "demands for/related to maternity leave, family allowances, other social programs"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 40,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "tag",
+        "field": "struggles and demands related to other unrealized social needs (e.g. housing)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 41,
+    "fields": {
+        "parent": 35,
+        "category": 3,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 42,
+    "fields": {
+        "parent": null,
+        "category": 3,
+        "field_type": "group",
+        "field": "Improvement of working conditions"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 43,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Participation in long-term struggle for introducing, preserving, engendering or degendering labour protection legislation and standards"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 44,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Struggle for good, healthy and safe working conditions"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 45,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Struggle for improving the working environment"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 46,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Struggle for social benefits (housing, vacation)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 47,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Protection against sexual harassment and mobbing"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 48,
+    "fields": {
+        "parent": 42,
+        "category": 3,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 49,
+    "fields": {
+        "parent": null,
+        "category": 3,
+        "field_type": "group",
+        "field": "Labour activism in connection to different agendas"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 50,
+    "fields": {
+        "parent": 49,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Struggle for basic political, civic and community rights"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 51,
+    "fields": {
+        "parent": 49,
+        "category": 3,
+        "field_type": "tag",
+        "field": "Struggle invoking other major categories of difference (specifiy which in the Other box)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 52,
+    "fields": {
+        "parent": 49,
+        "category": 3,
+        "field_type": "other",
+        "field": "Other struggles"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 53,
+    "fields": {
+        "parent": null,
+        "category": 4,
+        "field_type": "tag",
+        "field": "Full goal achievement (what was requested is exactly what occurred)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 54,
+    "fields": {
+        "parent": null,
+        "category": 4,
+        "field_type": "tag",
+        "field": "Partial goal achievement (what occurred was consistent with the goal but not exactly what was requested)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 55,
+    "fields": {
+        "parent": null,
+        "category": 4,
+        "field_type": "tag",
+        "field": "No goal achievement (what occurred is neither the action requested in the goal nor an action consistent with the goal)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 56,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "group",
+        "field": "Non-working"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 57,
+    "fields": {
+        "parent": 56,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Cannot (be expected to) work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 58,
+    "fields": {
+        "parent": 56,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Affluent"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 59,
+    "fields": {
+        "parent": 56,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Unemployed"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 60,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "group",
+        "field": "Reciprocal Labour- Household(s)"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 61,
+    "fields": {
+        "parent": 60,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Leading producers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 62,
+    "fields": {
+        "parent": 60,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Kin producers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 63,
+    "fields": {
+        "parent": 60,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Kin non-producers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 64,
+    "fields": {
+        "parent": 60,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Servants"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 65,
+    "fields": {
+        "parent": 60,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Redistributive labourers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 66,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "group",
+        "field": "Tributary Labour- Polity"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 67,
+    "fields": {
+        "parent": 66,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Obligatory labourers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 68,
+    "fields": {
+        "parent": 66,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Indentured tributary labourers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 69,
+    "fields": {
+        "parent": 66,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Tributary serfs"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 70,
+    "fields": {
+        "parent": 66,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Tributary slaves"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 71,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "group",
+        "field": "Market commodified work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 72,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Self-employed leading producers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 73,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Self-employed kin producers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 74,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "group",
+        "field": "Employers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 75,
+    "fields": {
+        "parent": 74,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Of free wage earners"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 76,
+    "fields": {
+        "parent": 74,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Of indentured labourers"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 77,
+    "fields": {
+        "parent": 74,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Of serfs"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 78,
+    "fields": {
+        "parent": 74,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Of slaves"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 79,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "group",
+        "field": "Wage earners"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 80,
+    "fields": {
+        "parent": 79,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Sharecropping"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 81,
+    "fields": {
+        "parent": 79,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Piece-rate"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 82,
+    "fields": {
+        "parent": 79,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Time-rate"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 83,
+    "fields": {
+        "parent": 79,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Cooperative sub-contraction"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 84,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Indentured labour"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 85,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Serfs"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 86,
+    "fields": {
+        "parent": 71,
+        "category": 5,
+        "field_type": "group",
+        "field": "Slaves"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 87,
+    "fields": {
+        "parent": 86,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Working for proprietor"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 88,
+    "fields": {
+        "parent": 86,
+        "category": 5,
+        "field_type": "tag",
+        "field": "For hire"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 89,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "group",
+        "field": "Non-market commodified work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 90,
+    "fields": {
+        "parent": 89,
+        "category": 5,
+        "field_type": "group",
+        "field": "Wage earners"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 91,
+    "fields": {
+        "parent": 90,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Sharecropping"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 92,
+    "fields": {
+        "parent": 90,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Piece-rate"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 93,
+    "fields": {
+        "parent": 90,
+        "category": 5,
+        "field_type": "tag",
+        "field": "Time-rate"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 94,
+    "fields": {
+        "parent": null,
+        "category": 5,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 95,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Standard employment"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 96,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Casual employment"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 97,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Informal employment"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 98,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Seasonal work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 99,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Feminized work"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 100,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Intense labour migration"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 101,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Mechanisation"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 102,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Deskilling"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 103,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Rationalisation"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 104,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "group",
+        "field": "Discrimination"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 105,
+    "fields": {
+        "parent": 104,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Sexism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 106,
+    "fields": {
+        "parent": 104,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Homophobia"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 107,
+    "fields": {
+        "parent": 104,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Racism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 108,
+    "fields": {
+        "parent": 104,
+        "category": 6,
+        "field_type": "tag",
+        "field": "Chauvinism/xenophobia"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 109,
+    "fields": {
+        "parent": 104,
+        "category": 6,
+        "field_type": "other",
+        "field": "Other forms"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 110,
+    "fields": {
+        "parent": null,
+        "category": 6,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 111,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Economic crisis"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 112,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Armed conflict"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 113,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Labour regime"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 114,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Gender regime"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 115,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Nation building"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 116,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "State formation"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 117,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Postwar reconstruction"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 118,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Migration"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 119,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "State socialism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 120,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Neoliberalism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 121,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "group",
+        "field": "Movements"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 122,
+    "fields": {
+        "parent": 121,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Social"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 123,
+    "fields": {
+        "parent": 121,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Religious"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 124,
+    "fields": {
+        "parent": 121,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Political"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 125,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Imperialism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 126,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "tag",
+        "field": "Post-imperialism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 127,
+    "fields": {
+        "parent": null,
+        "category": 7,
+        "field_type": "other",
+        "field": "Other"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 128,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Apart from a larger cycle; Actions/activism different from a larger observable trend; Actions/activism that were (highly) locally-, regionally- or state- specific."
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 129,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Actions/activism mark new beginning; Ruptural moment; Watershed moment."
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 130,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Part of a passivist/non-activist trend during a period or at specific scale"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 131,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Apart from a passivist/non-activist trend during a period or at specific scale"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 132,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Part of a local, regional or national cycle of protest"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 133,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Part of a Regional, transnational or global cycle of protest"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 134,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Part of an international trend in in gender activism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 135,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Part of an international trend in labour activism"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 136,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Contributed to the formation of the politics of women\u2019s work internationally"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 137,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Contributed to the formation of the politics of women\u2019s work in the Region"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 138,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Contribution to imperial, post-imperial, nation-building or state-building processes"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 139,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Strongly or moderately influenced by continuities in post-imperial and nation- and state-building policies"
+    }
+},
+{
+    "model": "metadata.classificationfield",
+    "pk": 140,
+    "fields": {
+        "parent": null,
+        "category": 8,
+        "field_type": "tag",
+        "field": "Strongly or moderately influenced by changes in post-imperial and nation- and state-building policies"
+    }
+}
+]
