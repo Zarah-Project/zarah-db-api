@@ -88,8 +88,10 @@ class DocumentIndexer:
             # Zotero - Creators
             if 'creators' in zotero_data.keys():
                 for creator in zotero_data['creators']:
-                    self.doc['zotero_search'].append(creator['firstName'])
-                    self.doc['zotero_search'].append(creator['lastName'])
+                    if 'firstName' in creator.keys():
+                        self.doc['zotero_search'].append(creator['firstName'])
+                    if 'lastName' in creator.keys():
+                        self.doc['zotero_search'].append(creator['lastName'])
 
             # Zotero - Archive
             if 'archive' in zotero_data.keys():
