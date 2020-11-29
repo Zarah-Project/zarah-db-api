@@ -173,6 +173,6 @@ class DocumentIndexer:
             pass
 
         if len(date) == 5 and date.endswith('s'):
-            return date[0:4]
+            return "%s0000" % date[0:4]
 
         return ""
