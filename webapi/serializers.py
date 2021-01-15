@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from authority_list.models import Person, Organisation, Place, Event
-from document.models import Document, DocumentTriggeringFactorKeyword
+from document.models import Document, DocumentTriggeringFactorKeyword, DocumentKeyword, DocumentFile
 from metadata.models import Classification
 
 
@@ -50,14 +50,23 @@ class ClassificationSerializer(serializers.ModelSerializer):
         fields = ('category_key', 'full_name', 'field_type', 'text')
 
 
+class DocumentFileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentFile
+        fields = ('id', 'file_id', 'file_url')
+
+
 class DocumentReadPublicSerializer(serializers.ModelSerializer):
     people = serializers.SlugRelatedField(many=True, slug_field='full_name', queryset=Person.objects.all())
     places = PlaceSerializer(many=True, read_only=True)
     organisations = OrganisationSerializer(many=True, read_only=True)
     events = serializers.SlugRelatedField(many=True, slug_field='event_full', queryset=Event.objects.all())
     classifications = serializers.SerializerMethodField()
+    keywords = serializers.SlugRelatedField(many=True, slug_field='keyword',
+                                            queryset=DocumentKeyword.objects.all())
     triggering_factor_keywords = serializers.SlugRelatedField(many=True, slug_field='keyword',
                                                               queryset=DocumentTriggeringFactorKeyword.objects.all())
+    files = DocumentFileSerializer(many=True)
 
     def get_classifications(self, obj):
         allowed_keys = [
