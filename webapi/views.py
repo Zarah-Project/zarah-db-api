@@ -48,7 +48,7 @@ class StoredFilePublicView(APIView):
                 (filename, bytes_io) = get_stored_upload_file_data(su)
                 response = Response()
                 response.content = bytes_io
-                response["Content-Disposition"] = "attachment; filename={0}".format(filename)
+                response["Content-Disposition"] = "inline; filename={0}".format(filename)
                 response["Content-Type"] = 'application/pdf'
                 return response
             except FileNotFoundError:
