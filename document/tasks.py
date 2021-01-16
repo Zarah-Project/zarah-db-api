@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from document.indexer import DocumentIndexer
+from document.indexers.indexer import DocumentIndexer
 from document.models import Document
 
 
