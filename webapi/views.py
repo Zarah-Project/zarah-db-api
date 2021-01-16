@@ -1,4 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.decorators import method_decorator
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django_drf_filepond.api import get_stored_upload, get_stored_upload_file_data
 from rest_framework import generics, status
 from rest_framework.generics import get_object_or_404
@@ -28,6 +30,7 @@ class StoredFilePublicView(APIView):
     authentication_classes = []
     permission_classes = []
 
+    @method_decorator(xframe_options_exempt)
     def get(self, request, id):
         restricted = False
 
