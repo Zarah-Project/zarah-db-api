@@ -19,6 +19,8 @@ class DocumentPublicSearch(ListAPIView):
 
     def list(self, request, *args, **kwargs):
         limit = request.query_params.get('limit', 10)
+        if limit == '':
+            limit = 10
         offset = request.query_params.get('offset', 0)
 
         query = request.query_params.get('query', '')
