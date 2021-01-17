@@ -32,14 +32,9 @@ class DocumentPublicSearch(ListAPIView):
         filters_or = []
         date_filters = []
 
-        qf = [
-            'attachment_text_search^5',
-            'title_search^3',
-            'abstract_search^2.5',
-            'authority_search^2.5',
-            'zotero_search^2.5',
-            'keyword_search^2.5',
-        ]
+        qf = []
+        self._append_query_fields(request, qf)
+
         params = {
             'search': query,
             'ordering': ordering,
@@ -55,19 +50,19 @@ class DocumentPublicSearch(ListAPIView):
             'facet_sort': 'index'
         }
 
-        self._append_filters(request, filters, 'person')
-        self._append_filters(request, filters, 'organisation')
-        self._append_filters(request, filters, 'place')
-        self._append_filters(request, filters, 'event')
-        self._append_filters(request, filters, 'keyword')
-        self._append_filters(request, filters, 'historical_context')
-        self._append_filters(request, filters, 'labour_conditions')
-        self._append_filters(request, filters, 'living_conditions')
-        self._append_filters(request, filters, 'labour_relations')
-        self._append_filters(request, filters, 'activist_repertoire')
-        self._append_filters(request, filters, 'activist_repertoire_scale')
-        self._append_filters(request, filters, 'format_of_participation')
-        self._append_filters(request, filters, 'knowledge_production')
+        filters = self._append_filters(request, filters, 'person')
+        filters = self._append_filters(request, filters, 'organisation')
+        filters = self._append_filters(request, filters, 'place')
+        filters = self._append_filters(request, filters, 'event')
+        filters = self._append_filters(request, filters, 'keyword')
+        filters = self._append_filters(request, filters, 'historical_context')
+        filters = self._append_filters(request, filters, 'labour_conditions')
+        filters = self._append_filters(request, filters, 'living_conditions')
+        filters = self._append_filters(request, filters, 'labour_relations')
+        filters = self._append_filters(request, filters, 'activist_repertoire')
+        filters = self._append_filters(request, filters, 'activist_repertoire_scale')
+        filters = self._append_filters(request, filters, 'format_of_participation')
+        filters = self._append_filters(request, filters, 'knowledge_production')
 
         params['filters'] = filters
         params['filters_or'] = filters_or
@@ -90,8 +85,42 @@ class DocumentPublicSearch(ListAPIView):
             resp['next'] = True
         return Response(resp)
 
+    def _append_query_fields(self, request, qf):
+        fields = {
+            'attachment_text': 'attachment_text_search^5',
+            'title': 'title_search^3',
+            'abstract': 'abstract_search^2.5',
+            'authority': 'authority_search^2.5',
+            'zotero': 'zotero_search^1.5',
+            'keyword': 'keyword_search^1.5'
+        }
+        qf_param = request.query_params.getlist('query_fields', None)
+        if len(qf_param) > 0:
+            for qfp in qf_param:
+                if qfp in fields:
+                    qf.append(fields[qfp])
+
+        qf_param = request.query_params.getlist('query_fields[]', None)
+        if len(qf_param) > 0:
+            for qfp in qf_param:
+                if qfp in fields:
+                    qf.append(fields[qfp])
+
+        if len(qf) == 0:
+            for key in fields.keys():
+                qf.append(fields[key])
+
+        return qf
+
     def _append_filters(self, request, filters, field):
-        param = request.query_params.get(field, None)
-        if param:
-            f = {'%s_facet' % field: param}
-            filters.append(f)
+        f_param = request.query_params.getlist('%s' % field, None)
+        if len(f_param) > 0:
+            for fp in f_param:
+                filters.append({'%s_facet' % field: fp})
+
+        f_param = request.query_params.getlist('%s[]' % field, None)
+        if len(f_param) > 0:
+            for fp in f_param:
+                filters.append({'%s_facet' % field: fp})
+
+        return filters
