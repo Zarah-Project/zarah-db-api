@@ -87,6 +87,7 @@ class DocumentReadPublicSerializer(serializers.ModelSerializer):
 
 class DocumentReadTeamSerializer(serializers.ModelSerializer):
     classifications = serializers.SerializerMethodField()
+    files = DocumentFileSerializer(many=True)
 
     def get_classifications(self, obj):
         allowed_keys = ['historical_context']
@@ -102,6 +103,8 @@ class DocumentReadTeamSerializer(serializers.ModelSerializer):
 
 
 class DocumentReadIndividualSerializer(serializers.ModelSerializer):
+    files = DocumentFileSerializer(many=True)
+
     class Meta:
         model = Document
         exclude = ('abstract', 'summary', 'additional_research', 'people', 'organisations', 'places', 'events')
