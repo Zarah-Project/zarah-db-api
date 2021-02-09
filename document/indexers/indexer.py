@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 
 import tika
 tika.TikaClientOnly = True
@@ -41,7 +42,8 @@ class DocumentIndexer:
             'created_by_facet': None,
 
             # Sort fields
-            'title_sort': None
+            'title_sort': None,
+            'date_sort': None
         }
 
     def index(self):
@@ -109,9 +111,10 @@ class DocumentIndexer:
             if 'itemType' in zotero_data.keys():
                 self.doc['item_type'] = zotero_data['itemType']
 
-            # Zotero - Item Type
+            # Zotero - Date
             if 'date' in zotero_data.keys():
                 self.doc['year'] = zotero_data['date']
+                self.doc['date_sort'] = self._parse_date(zotero_data['date'])
 
         self.doc['full_text'].append(self.document.abstract)
         self.doc['full_text'].append(self.document.summary)
@@ -142,3 +145,34 @@ class DocumentIndexer:
                     self.doc['full_text'].append(parsed["content"])
                 except Exception as e:
                     print(e)
+
+    def _parse_date(self, date):
+        date.replace('Likely', '')
+        date.replace('likely', '')
+        date.replace('ca.', '')
+        date.replace('[', '')
+        date.replace('?]', '')
+        date.strip()
+
+        try:
+            datetime.strptime(date, "%Y")
+            return "%s0000" % date
+        except ValueError:
+            pass
+
+        try:
+            d = datetime.strptime(date, "%B %Y")
+            return "%s00" % (d.strftime("%Y%m"))
+        except ValueError:
+            pass
+
+        try:
+            d = datetime.strptime(date, "%d %B %Y")
+            return "%d%02d%02d" % (d.year, d.month, d.day)
+        except ValueError:
+            pass
+
+        if len(date) == 5 and date.endswith('s'):
+            return "%s0000" % date[0:4]
+
+        return ""

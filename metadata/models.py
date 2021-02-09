@@ -4,7 +4,7 @@ from model_clone import CloneMixin
 
 class Classification(CloneMixin, models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='classifications')
-    classification_field = models.ForeignKey('ClassificationField', on_delete=models.PROTECT)
+    classification_field = models.ForeignKey('ClassificationField', on_delete=models.CASCADE)
     classification_other_text = models.TextField(blank=True)
 
     _clone_many_to_one_or_one_to_many_fields = ['classification_field']

@@ -26,9 +26,6 @@ class DocumentSearch(ListAPIView):
         else:
             ordering = request.query_params.get('ordering', 'title')
 
-        # Title sort hack
-        ordering = ordering.replace('title', 'title_sort')
-
         filters = []
         filters_or = []
         date_filters = []

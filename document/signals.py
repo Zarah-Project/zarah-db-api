@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 
-from document.indexer import DocumentIndexer
+from document.indexers.indexer import DocumentIndexer
 from document.models import Document
 
 
