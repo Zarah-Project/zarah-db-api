@@ -9,7 +9,19 @@ class PlaceSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
 
     def get_full_name(self, obj):
-        return "%s (%s)" % (obj.place_name, obj.country)
+        on = []
+        for other_name in obj.other_names.iterator():
+            on.append(other_name.place_name.strip())
+
+        if len(on) > 0:
+            places = "%s/%s" % (obj.place_name, "/".join(on))
+        else:
+            places = obj.place_name
+
+        if obj.country:
+            return "%s (%s)" % (places, obj.country)
+        else:
+            return places
 
     class Meta:
         model = Place
