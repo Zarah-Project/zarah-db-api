@@ -118,16 +118,21 @@ class Searcher:
 
     def set_order(self, ordering):
         # Ordering params
-        ordering_direction = 'asc'
-        if ordering == '':
-            ordering = '-score'
+        order_list = []
+        ordering = ordering.split(',')
 
-        if ordering[0] == '-':
-            ordering = ordering[1:]
-            ordering_direction = 'desc'
+        for order in ordering:
+            ordering_direction = 'asc'
+            if order == '':
+                order = '-score'
+
+            if order[0] == '-':
+                order = order[1:]
+                ordering_direction = 'desc'
+            order_list.append("%s %s" % (order, ordering_direction))
 
         tie_breaker = self.get_tie_breaker(ordering)
-        self.sort = "%s %s,%s" % (ordering, ordering_direction, tie_breaker)
+        self.sort = "%s,%s" % (",".join(order_list), tie_breaker)
 
     def set_qf(self, qf):
         self.qf = " ".join(qf)
