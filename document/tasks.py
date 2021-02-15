@@ -1,16 +1,33 @@
-from celery import shared_task
+from document.indexers.public_indexer import PublicIndexer
+from document.models import Document
+from zarah_db_api.celery import app
 
 from document.indexers.indexer import DocumentIndexer
-from document.models import Document
 
 
-@shared_task
-def hello():
-    print("Hello there!")
-
-
-@shared_task
-def index_document(document_id):
-    document = Document.objects.get(pk=document_id)
+@app.task
+def index_document_admin(id):
+    document = Document.objects.get(pk=id)
     indexer = DocumentIndexer(document)
     indexer.index()
+
+
+@app.task
+def index_document_public(id):
+    document = Document.objects.get(pk=id)
+    indexer = PublicIndexer(document)
+    indexer.index()
+
+
+@app.task
+def remove_document_admin(id):
+    document = Document.objects.get(pk=id)
+    indexer = DocumentIndexer(document)
+    indexer.remove_record()
+
+
+@app.task
+def remove_document_public(id):
+    document = Document.objects.get(pk=id)
+    indexer = PublicIndexer(document)
+    indexer.remove_record()
