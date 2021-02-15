@@ -63,6 +63,7 @@ class DocumentIndexer:
         self.doc['id'] = self.document.id
         self.doc['title'] = self.document.title
         self.doc['created_by'] = self.document.created_by.username if self.document.created_by else ''
+        self.doc['created_by_sort'] = self.document.created_by.username if self.document.created_by else ''
 
         # Search
         self.doc['title_search'] = self.doc['title']
