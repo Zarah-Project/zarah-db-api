@@ -30,6 +30,8 @@ class DocumentIndexer:
             'item_type': None,
             'language': None,
             'year': None,
+            'document_privacy': None,
+            'metadata_privacy': None,
 
             # Search fields
             'title_search': [],
@@ -64,6 +66,9 @@ class DocumentIndexer:
         self.doc['title'] = self.document.title
         self.doc['created_by'] = self.document.created_by.username if self.document.created_by else ''
         self.doc['created_by_sort'] = self.document.created_by.username if self.document.created_by else ''
+
+        self.doc['metadata_privacy'] = self.document.record_type
+        self.doc['document_privacy'] = self.document.attachment_type
 
         # Search
         self.doc['title_search'] = self.doc['title']

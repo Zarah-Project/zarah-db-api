@@ -41,7 +41,7 @@ class DocumentSearch(ListAPIView):
             'search': query,
             'ordering': ordering,
             'qf': qf,
-            'fl': 'id,title,language,item_type,year,created_by',
+            'fl': 'id,title,language,item_type,year,created_by,metadata_privacy,document_privacy',
             'facet': True,
             'facet_fields': ['created_by_facet',],
             'facet_sort': 'index'
