@@ -20,7 +20,7 @@ def index_person(id):
 @app.task
 def index_organisation(id):
     organisation = Organisation.objects.get(pk=id)
-    documents = Document.objects.filter(organsations=organisation)
+    documents = Document.objects.filter(organisations=organisation)
     for document in documents.iterator():
         indexer = DocumentIndexer(document)
         indexer.index()
