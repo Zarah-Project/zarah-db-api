@@ -1,8 +1,8 @@
 from celery import Celery
 
-app = Celery('zarah',
-             broker='redis://localhost',
-             include=['document.tasks', 'authority_list.tasks'])
+app = Celery("zarah")
+app.config_from_object("django.conf:settings", namespace="CELERY")
+app.autodiscover_tasks()
 
 # Optional configuration, see the application user guide.
 app.conf.update(
