@@ -55,6 +55,8 @@ class Searcher:
         hl = params.get('hl', None)
         if hl:
             self.hl = hl
+        else:
+            self.hl = "false"
 
         hl_fl = params.get('hl.fl', None)
         if hl_fl:
