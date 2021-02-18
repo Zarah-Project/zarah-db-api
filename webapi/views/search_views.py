@@ -49,6 +49,8 @@ class DocumentPublicSearch(ListAPIView):
                 'labour_relations_facet', 'activist_repertoire_facet', 'activist_repertoire_scale_facet',
                 'format_of_participation_facet', 'knowledge_production_facet'
             ],
+            'hl': 'on',
+            'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,keyword_search',
             'facet_sort': 'index'
         }
 
@@ -81,7 +83,8 @@ class DocumentPublicSearch(ListAPIView):
         resp = {
             'count': response.hits,
             'results': response.docs,
-            'facets': response.facets
+            'facets': response.facets,
+            'highlights': response.highlighting
         }
         if (int(limit) + int(offset)) < int(response.hits):
             resp['next'] = True

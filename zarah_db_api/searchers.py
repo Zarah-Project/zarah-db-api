@@ -15,6 +15,8 @@ class Searcher:
         self.sort = ""
         self.qf = ""
         self.fl = ""
+        self.hl = ""
+        self.hl_fl = ""
         self.start = 0
         self.rows_per_page = 10
         self.tie_breaker = ""
@@ -50,6 +52,14 @@ class Searcher:
         fl = params.get('fl', '')
         self.set_fl(fl)
 
+        hl = params.get('hl', None)
+        if hl:
+            self.hl = hl
+
+        hl_fl = params.get('hl.fl', None)
+        if hl_fl:
+            self.hl_fl = hl_fl
+
         # Set faceting
         facet = params.get('facet', False)
         if facet:
@@ -66,6 +76,8 @@ class Searcher:
             'fq': self.fq,
             'fl': self.fl,
             'q.op': 'AND',
+            'hl': self.hl,
+            'hl.fl': self.hl_fl,
             'facet.field': self.facet_fields,
             'facet.sort': self.facet_sort,
             'facet.limit': -1,

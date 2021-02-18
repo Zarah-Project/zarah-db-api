@@ -35,7 +35,6 @@ class PublicIndexer:
             'archive_location': None,
             'date': None,
             'file': [],
-            'attachment_text': None,
 
             # Search fields
             'title_search': None,
