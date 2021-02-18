@@ -192,7 +192,6 @@ class PublicIndexer:
                     su = get_stored_upload(file.file_id)
                     (filename, bytes_io) = get_stored_upload_file_data(su)
                     parsed = parser.from_file(os.path.join(settings.DJANGO_DRF_FILEPOND_FILE_STORE_PATH, filename))
-                    self.doc['attachment_text'] = parsed["content"]
                     self.doc['attachment_text_search'] = parsed["content"]
                 except Exception as e:
                     print(e)
