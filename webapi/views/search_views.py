@@ -77,10 +77,10 @@ class DocumentPublicSearch(ListAPIView):
         try:
             if year_start and year_end:
                 if re.match(r'.*([1-3][0-9]{3})', year_start) and re.match(r'.*([1-3][0-9]{3})', year_end):
-                    date_filters.append({'temporal_coverage_search': '[%s TO %s]' % (year_start, year_end)})
+                    date_filters.append({'date_search': '[%s TO %s]' % (year_start, year_end)})
             if year_start and not year_end:
                 if re.match(r'.*([1-3][0-9]{3})', year_start):
-                    date_filters.append({'temporal_coverage_search': '[%s TO %s]' % (year_start, year_start)})
+                    date_filters.append({'date_search': '[%s TO %s]' % (year_start, year_start)})
         except ValueError:
             pass
 
