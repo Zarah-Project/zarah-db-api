@@ -96,6 +96,7 @@ class DocumentPublicSearch(ListAPIView):
             'title': 'title_search^3',
             'abstract': 'abstract_search^2.5',
             'authority': 'authority_search^2.5',
+            'classification': 'classification_search^2.5',
             'zotero': 'zotero_search^1.5',
             'keyword': 'keyword_search^1.5'
         }

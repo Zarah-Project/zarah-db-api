@@ -41,8 +41,10 @@ class PublicIndexer:
             'abstract_search': None,
             'attachment_text_search': None,
             'keyword_search': [],
+            'classification_search': [],
             'authority_search': [],
             'zotero_search': [],
+            'date_search': "",
 
             # Facet fields
             'person_facet': [],
@@ -58,6 +60,7 @@ class PublicIndexer:
             'activist_repertoire_scale_facet': [],
             'format_of_participation_facet': [],
             'knowledge_production_facet': [],
+            'date_facet': [],
 
             # Sort fields
             'title_sort': None,
@@ -149,6 +152,15 @@ class PublicIndexer:
                 self.doc['date'] = zotero_data['date']
                 self.doc['date_sort'] = self._parse_date(zotero_data['date'])
 
+            # Date facets
+                date = zotero_data['date']
+                dates = self._from_to_date(date)
+
+                if dates[0] != 0 and dates[1] != 0:
+                    self.doc['date_search'] = "[%s TO %s]" % (dates[0], dates[1])
+                    for year in range(int(dates[0]), int(dates[1])):
+                        self.doc['date_facet'].append(year)
+
         # Keywords
         if self.document.record_type == 'default':
             for keyword in self.document.triggering_factor_keywords.iterator():
@@ -196,13 +208,47 @@ class PublicIndexer:
                 except Exception as e:
                     print(e)
 
+    def _from_to_date(self, date):
+        if date.find('Likely') > -1:
+            d = self._parse_date(date)
+            if self._parse_date(date) != "":
+                return [d[0:4], d[0:4]]
+
+        if date.find('likely') > -1:
+            d = self._parse_date(date)
+            if self._parse_date(date) != "":
+                return [d[0:4], d[0:4]]
+
+        if date.find('ca.') > -1:
+            d = self._parse_date(date)
+            if self._parse_date(date) != "":
+                return [int(d[0:4])-1, int(d[0:4])+1]
+
+        if date.startswith('['):
+            d = self._parse_date(date)
+            if self._parse_date(date) != "":
+                return [int(d[0:4])-1, int(d[0:4])+1]
+
+        if date.endswith('s'):
+            d = self._parse_date(date)
+            if self._parse_date(date) != "":
+                return ["%s0" % d[0:3], "%s9" % d[0:3]]
+
+        d = self._parse_date(date)
+        if self._parse_date(date) != "":
+            return [d[0:4], d[0:4]]
+        else:
+            return [0, 0]
+
     def _parse_date(self, date):
-        date.replace('Likely', '')
-        date.replace('likely', '')
-        date.replace('ca.', '')
-        date.replace('[', '')
-        date.replace('?]', '')
-        date.strip()
+        date = date.replace('Likely', '')
+        date = date.replace('likely', '')
+        date = date.replace('ca.', '')
+        date = date.replace('[', '')
+        date = date.replace('?', '')
+        date = date.replace(']', '')
+        date = date.replace('s', '')
+        date = date.strip()
 
         try:
             datetime.strptime(date, "%Y")
