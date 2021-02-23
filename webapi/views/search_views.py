@@ -1,3 +1,5 @@
+import re
+
 from django.conf import settings
 from pysolr import SolrError
 from rest_framework.generics import ListAPIView
@@ -47,7 +49,7 @@ class DocumentPublicSearch(ListAPIView):
                 'person_facet', 'organisation_facet', 'place_facet', 'event_facet', 'keyword_facet',
                 'historical_context_facet', 'labour_conditions_facet', 'living_conditions_facet',
                 'labour_relations_facet', 'activist_repertoire_facet', 'activist_repertoire_scale_facet',
-                'format_of_participation_facet', 'knowledge_production_facet'
+                'format_of_participation_facet', 'knowledge_production_facet', 'date_facet'
             ],
             'hl': 'on',
             'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,keyword_search',
@@ -67,6 +69,20 @@ class DocumentPublicSearch(ListAPIView):
         filters = self._append_filters(request, filters, 'activist_repertoire_scale')
         filters = self._append_filters(request, filters, 'format_of_participation')
         filters = self._append_filters(request, filters, 'knowledge_production')
+
+        year_start = request.query_params.get('year_start', None)
+        year_end = request.query_params.get('year_end', None)
+
+        # Date coverage
+        try:
+            if year_start and year_end:
+                if re.match(r'.*([1-3][0-9]{3})', year_start) and re.match(r'.*([1-3][0-9]{3})', year_end):
+                    date_filters.append({'temporal_coverage_search': '[%s TO %s]' % (year_start, year_end)})
+            if year_start and not year_end:
+                if re.match(r'.*([1-3][0-9]{3})', year_start):
+                    date_filters.append({'temporal_coverage_search': '[%s TO %s]' % (year_start, year_start)})
+        except ValueError:
+            pass
 
         params['filters'] = filters
         params['filters_or'] = filters_or
