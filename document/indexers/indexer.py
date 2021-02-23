@@ -153,12 +153,13 @@ class DocumentIndexer:
                     print(e)
 
     def _parse_date(self, date):
-        date.replace('Likely', '')
-        date.replace('likely', '')
-        date.replace('ca.', '')
-        date.replace('[', '')
-        date.replace('?]', '')
-        date.strip()
+        date = date.replace('Likely', '')
+        date = date.replace('likely', '')
+        date = date.replace('ca.', '')
+        date = date.replace('[', '')
+        date = date.replace('?]', '')
+        date = date.replace('s', '')
+        date = date.strip()
 
         try:
             datetime.strptime(date, "%Y")
