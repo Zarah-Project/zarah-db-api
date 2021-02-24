@@ -212,12 +212,12 @@ class PublicIndexer:
         if date.find('Likely') > -1:
             d = self._parse_date(date)
             if self._parse_date(date) != "":
-                return [d[0:4], d[0:4]]
+                return [int(d[0:4]), int(d[0:4])+1]
 
         if date.find('likely') > -1:
             d = self._parse_date(date)
             if self._parse_date(date) != "":
-                return [d[0:4], d[0:4]]
+                return [int(d[0:4]), int(d[0:4])+1]
 
         if date.find('ca.') > -1:
             d = self._parse_date(date)
@@ -236,7 +236,7 @@ class PublicIndexer:
 
         d = self._parse_date(date)
         if self._parse_date(date) != "":
-            return [d[0:4], d[0:4]]
+            return [int(d[0:4]), int(d[0:4]) + 1]
         else:
             return [0, 0]
 
