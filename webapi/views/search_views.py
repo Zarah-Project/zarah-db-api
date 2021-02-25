@@ -52,7 +52,7 @@ class DocumentPublicSearch(ListAPIView):
                 'format_of_participation_facet', 'knowledge_production_facet', 'date_facet'
             ],
             'hl': 'on',
-            'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,keyword_search',
+            'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,classification_search,keyword_search',
             'facet_sort': 'index'
         }
 
