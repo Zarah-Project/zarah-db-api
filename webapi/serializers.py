@@ -1,3 +1,5 @@
+from django.conf import settings
+from pyzotero import zotero
 from rest_framework import serializers
 
 from authority_list.models import Person, Organisation, Place, Event
@@ -120,3 +122,19 @@ class DocumentReadIndividualSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         exclude = ('abstract', 'summary', 'additional_research', 'people', 'organisations', 'places', 'events')
+
+
+class DocumentCitationSerializer(serializers.ModelSerializer):
+    citation = serializers.SerializerMethodField()
+
+    def get_citation(self, obj):
+        zotero_id = obj.zotero_id
+        if zotero_id:
+            zot = zotero.Zotero(settings.ZOTERO_LIBRARY_ID, 'group', settings.ZOTERO_API_KEY)
+            zot.add_parameters(content='bib')
+            item = zot.item(zotero_id)
+            return item[0]
+
+    class Meta:
+        model = Document
+        fields = ('citation',)

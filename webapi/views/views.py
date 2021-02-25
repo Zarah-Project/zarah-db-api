@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from document.models import Document, DocumentFile
-from webapi.serializers import DocumentReadPublicSerializer, DocumentReadTeamSerializer, DocumentReadIndividualSerializer
+from webapi.serializers import DocumentReadPublicSerializer, DocumentReadTeamSerializer, \
+    DocumentReadIndividualSerializer, DocumentCitationSerializer
 
 
 class DocumentPublicDetail(generics.RetrieveAPIView):
@@ -24,6 +25,13 @@ class DocumentPublicDetail(generics.RetrieveAPIView):
             return DocumentReadTeamSerializer
         if document.record_type == 'individual':
             return DocumentReadIndividualSerializer
+
+
+class DocumentCitation(generics.RetrieveAPIView):
+    queryset = Document.objects.all()
+    authentication_classes = []
+    permission_classes = []
+    serializer_class = DocumentCitationSerializer
 
 
 class StoredFilePublicView(APIView):
