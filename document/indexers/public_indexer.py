@@ -112,10 +112,15 @@ class PublicIndexer:
 
             for place in self.document.places.iterator():
                 self.doc['authority_search'].append(place.place_name)
-                self.doc['place_facet'].append(place.place_name)
+
+                if place.country and place.place_name != place.country:
+                    self.doc['place_facet'].append("%s, %s" % (place.place_name, place.country))
+                    self.doc['authority_search'].append(place.country)
+                else:
+                    self.doc['place_facet'].append(place.place_name)
+
                 for other_name in place.other_names.iterator():
                     self.doc['authority_search'].append(other_name.place_name)
-                    self.doc['place_facet'].append(other_name.place_name)
 
             for event in self.document.events.iterator():
                 self.doc['authority_search'].append(event.event)
@@ -195,6 +200,11 @@ class PublicIndexer:
         for classification in classifications:
             if classification.classification_field.field_type == 'tag':
                 values.append(classification.classification_field.full_name)
+
+                cs = classification.classification_field.full_name.split('->')
+                for c in cs:
+                    self.doc['classification_search'].append(c.strip())
+
         return values
 
     def _index_file_content(self):
