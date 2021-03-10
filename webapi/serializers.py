@@ -133,7 +133,7 @@ class DocumentCitationSerializer(serializers.ModelSerializer):
             zot = zotero.Zotero(settings.ZOTERO_LIBRARY_ID, 'group', settings.ZOTERO_API_KEY)
             zot.add_parameters(content='bib')
             item = zot.item(zotero_id)
-            return item[0]
+            return item[0].replace('</div>', ' Retrieved from ZARAH DB database.</div>')
 
     class Meta:
         model = Document
