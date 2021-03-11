@@ -2,13 +2,24 @@ from django.conf import settings
 from pyzotero import zotero
 from rest_framework import serializers
 
-from authority_list.models import Person, Organisation, Place, Event
+from authority_list.models import Person, Organisation, Place, Event, PersonOtherName, PlaceOtherName, OrganisationForm, \
+    OrganisationFormScale
+from authority_list.serializers import PersonOtherNameSerializer, PlaceOtherNameSerializer
 from document.models import Document, DocumentTriggeringFactorKeyword, DocumentKeyword, DocumentFile
 from metadata.models import Classification
 
 
+class PersonSerializer(serializers.ModelSerializer):
+    other_names = PersonOtherNameSerializer(many=True, required=False)
+
+    class Meta:
+        model = Person
+        fields = ['full_name', 'other_names', 'notes']
+
+
 class PlaceSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
+    other_names = PlaceOtherNameSerializer(many=True, required=False)
 
     def get_full_name(self, obj):
         on = []
@@ -27,18 +38,39 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ['full_name']
+        fields = ['full_name', 'place_name', 'other_names', 'country', 'notes']
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
+    organisation_form = serializers.SlugRelatedField(slug_field='form', queryset=OrganisationForm.objects.all())
+    organisation_form_scale = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
+    organisation_gendered_membership = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
 
     def get_full_name(self, obj):
         return "%s (%s)" % (obj.name, obj.acronym)
 
     class Meta:
         model = Organisation
-        fields = ['full_name']
+        fields = ['full_name', 'name', 'acronym',
+                  'organisation_form', 'organisation_form_text',
+                  'organisation_form_scale', 'organisation_form_scale_text',
+                  'organisation_gendered_membership', 'organisation_gendered_membership_text',
+                  'notes']
+
+
+class EventSerializer(serializers.ModelSerializer):
+    date = serializers.SerializerMethodField()
+
+    def get_date(self, obj):
+        if obj.date_to:
+            return "%s - %s" % (obj.date_from, obj.date_to)
+        else:
+            return str(obj.date_from)
+
+    class Meta:
+        model = Event
+        fields = ['event_full', 'date', 'event']
 
 
 class ClassificationSerializer(serializers.ModelSerializer):
@@ -71,10 +103,10 @@ class DocumentFileSerializer(serializers.ModelSerializer):
 
 
 class DocumentReadPublicSerializer(serializers.ModelSerializer):
-    people = serializers.SlugRelatedField(many=True, slug_field='full_name', queryset=Person.objects.all())
+    people = PersonSerializer(many=True, read_only=True)
     places = PlaceSerializer(many=True, read_only=True)
     organisations = OrganisationSerializer(many=True, read_only=True)
-    events = serializers.SlugRelatedField(many=True, slug_field='event_full', queryset=Event.objects.all())
+    events = EventSerializer(many=True, read_only=True)
     classifications = serializers.SerializerMethodField()
     keywords = serializers.SlugRelatedField(many=True, slug_field='keyword',
                                             queryset=DocumentKeyword.objects.all())
