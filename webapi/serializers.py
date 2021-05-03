@@ -45,7 +45,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     organisation_form = serializers.SlugRelatedField(slug_field='form', queryset=OrganisationForm.objects.all())
     organisation_form_scale = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
-    organisation_gendered_membership = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
+    organisation_gendered_membership = serializers.SlugRelatedField(slug_field='membership', queryset=OrganisationFormScale.objects.all())
 
     def get_full_name(self, obj):
         return "%s (%s)" % (obj.name, obj.acronym)
