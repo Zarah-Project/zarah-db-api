@@ -47,8 +47,8 @@ class StoredFileView(APIView):
             attachmemnt_type = document_file.document.attachment_type
 
             if attachmemnt_type == 'individual':
-                if not request.user.is_staff or \
-                        not request.user.is_superuser or request.user != document_file.document.created_by:
+                if not request.user.is_staff and \
+                        not request.user.is_superuser and request.user != document_file.document.created_by:
                     restricted = True
         except ObjectDoesNotExist:
             restricted = False
