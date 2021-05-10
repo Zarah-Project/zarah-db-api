@@ -27,7 +27,7 @@ class PersonSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Person
         fields = ['id', 'full_name', 'first_name', 'last_name', 'other_names', 'notes', 'internal_notes',
-                  'is_removable', 'used']
+                  'is_removable', 'used', 'created_by']
 
 
 class PlaceOtherNameSerializer(serializers.ModelSerializer):
@@ -50,7 +50,7 @@ class PlaceSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Place
-        fields = '__all__'
+        fields = ('id', 'place_name', 'country', 'place_full', 'other_names', 'notes', 'internal_notes', 'is_removable', 'used')
 
 
 class OrganisationFormSerializer(serializers.ModelSerializer):
@@ -109,4 +109,4 @@ class EventSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'internal_notes', 'used', 'is_removable')
+        fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'internal_notes', 'used', 'is_removable', 'created_by')

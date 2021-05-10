@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -10,6 +11,9 @@ class Person(models.Model):
     last_name = models.CharField(max_length=200)
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     @property
     def full_name(self):
@@ -41,6 +45,9 @@ class Organisation(models.Model):
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
 
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         db_table = 'organisations'
 
@@ -71,10 +78,23 @@ class OrganisationGenderedMembership(models.Model):
 
 # Places
 class Place(models.Model):
-    place_name = models.CharField(max_length=200)
+    place_name = models.CharField(max_length=200, blank=True, null=True)
     country = models.CharField(max_length=200, blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def place_full(self):
+        if self.place_name:
+            if self.country:
+                return "%s, %s" % (self.place_name, self.country)
+            else:
+                return self.place_name
+        else:
+            return self.country
 
     class Meta:
         db_table = 'places'
@@ -94,6 +114,9 @@ class Event(models.Model):
     date_to = ApproximateDateField(blank=True)
     event = models.CharField(max_length=500, blank=True)
     internal_notes = models.TextField(blank=True, null=True)
+
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     @property
     def event_full(self):

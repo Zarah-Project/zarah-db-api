@@ -14,6 +14,9 @@ class PersonList(generics.ListCreateAPIView):
     ordering_fields = ['last_name', 'first_name']
     search_fields = ['first_name', 'last_name', 'other_names__first_name', 'other_names__last_name']
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Person.objects.all()
@@ -27,6 +30,9 @@ class PlaceList(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_filter = ['place_name', 'country']
     search_fields = ['place_name', 'other_names__place_name']
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -64,6 +70,9 @@ class OrganisationList(generics.ListCreateAPIView):
     ordering_fields = ['name', 'acronym']
     search_fields = ['name', 'acronym']
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class OrganisationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Organisation.objects.all()
@@ -77,6 +86,9 @@ class EventList(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_fields = ['event', 'date_from', 'date_to']
     search_fields = ['event', 'date_from', 'date_to']
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
