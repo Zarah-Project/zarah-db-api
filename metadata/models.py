@@ -32,6 +32,7 @@ class ClassificationField(models.Model):
     category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
     field_type = models.CharField(max_length=5, choices=[('tag', 'tag'), ('group', 'group'), ('other', 'other')])
     field = models.CharField(max_length=200)
+    ordering = models.IntegerField(default=0)
 
     @property
     def full_name(self):
@@ -45,6 +46,7 @@ class ClassificationField(models.Model):
 
     class Meta:
         db_table = 'classification_fields'
+        ordering = ['ordering', 'id']
 
 
 class ClassificationFurtherExplanation(CloneMixin, models.Model):
