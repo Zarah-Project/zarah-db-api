@@ -10,6 +10,7 @@ def do_index(sender, instance, **kwargs):
     index_document_admin(instance.id)
     index_document_public.delay(instance.id)
 
+
 @receiver([pre_delete], sender=Document)
 def remove_index(sender, instance, **kwargs):
     remove_document_admin(instance.id)
