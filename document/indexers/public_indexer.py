@@ -96,35 +96,39 @@ class PublicIndexer:
 
             # Authority Records
             for person in self.document.people.iterator():
-                self.doc['authority_search'].append("%s %s" % (person.first_name, person.last_name))
-                self.doc['person_facet'].append("%s %s" % (person.first_name, person.last_name))
-                for other_name in person.other_names.iterator():
-                    self.doc['authority_search'].append("%s %s" % (other_name.first_name, other_name.last_name))
-                    self.doc['person_facet'].append("%s %s" % (other_name.first_name, other_name.last_name))
+                if person.is_public:
+                    self.doc['authority_search'].append("%s %s" % (person.first_name, person.last_name))
+                    self.doc['person_facet'].append("%s %s" % (person.first_name, person.last_name))
+                    for other_name in person.other_names.iterator():
+                        self.doc['authority_search'].append("%s %s" % (other_name.first_name, other_name.last_name))
+                        self.doc['person_facet'].append("%s %s" % (other_name.first_name, other_name.last_name))
 
             for organisation in self.document.organisations.iterator():
-                self.doc['authority_search'].append(organisation.name)
-                self.doc['authority_search'].append(organisation.acronym)
-                if organisation.acronym:
-                    self.doc['organisation_facet'].append("%s (%s)" % (organisation.name, organisation.acronym))
-                else:
-                    self.doc['organisation_facet'].append(organisation.name)
+                if organisation.is_public:
+                    self.doc['authority_search'].append(organisation.name)
+                    self.doc['authority_search'].append(organisation.acronym)
+                    if organisation.acronym:
+                        self.doc['organisation_facet'].append("%s (%s)" % (organisation.name, organisation.acronym))
+                    else:
+                        self.doc['organisation_facet'].append(organisation.name)
 
             for place in self.document.places.iterator():
-                self.doc['authority_search'].append(place.place_name)
+                if place.is_public:
+                    self.doc['authority_search'].append(place.place_name)
 
-                if place.country and place.place_name != place.country:
-                    self.doc['place_facet'].append("%s, %s" % (place.place_name, place.country))
-                    self.doc['authority_search'].append(place.country)
-                else:
-                    self.doc['place_facet'].append(place.place_name)
+                    if place.country and place.place_name != place.country:
+                        self.doc['place_facet'].append("%s, %s" % (place.place_name, place.country))
+                        self.doc['authority_search'].append(place.country)
+                    else:
+                        self.doc['place_facet'].append(place.place_name)
 
-                for other_name in place.other_names.iterator():
-                    self.doc['authority_search'].append(other_name.place_name)
+                    for other_name in place.other_names.iterator():
+                        self.doc['authority_search'].append(other_name.place_name)
 
             for event in self.document.events.iterator():
-                self.doc['authority_search'].append(event.event)
-                self.doc['event_facet'].append(event.event)
+                if event.is_public:
+                    self.doc['authority_search'].append(event.event)
+                    self.doc['event_facet'].append(event.event)
 
         # Zotero
         if self.document.zotero_data:

@@ -2,8 +2,11 @@ from rest_framework import generics, filters
 
 from authority_list.models import Person, Place, OrganisationForm, OrganisationFormScale, Organisation, \
     OrganisationGenderedMembership, Event
-from authority_list.serializers import PersonSerializer, PlaceSerializer, OrganisationFormSerializer, \
-    OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationGenderedMembershipSerializer, EventSerializer
+from authority_list.serializers.event_serializers import EventSerializer, EventAdminSerializer
+from authority_list.serializers.organisation_serializers import OrganisationGenderedMembershipSerializer, \
+    OrganisationFormSerializer, OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationAdminSerializer
+from authority_list.serializers.person_serializers import PersonSerializer, PersonAdminSerializer
+from authority_list.serializers.place_serializers import PlaceSerializer, PlaceAdminSerializer
 
 
 class PersonList(generics.ListCreateAPIView):
@@ -20,7 +23,11 @@ class PersonList(generics.ListCreateAPIView):
 
 class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Person.objects.all()
-    serializer_class = PersonSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return PersonAdminSerializer
+        return PersonSerializer
 
 
 class PlaceList(generics.ListCreateAPIView):
@@ -37,7 +44,11 @@ class PlaceList(generics.ListCreateAPIView):
 
 class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Place.objects.all()
-    serializer_class = PlaceSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return PlaceAdminSerializer
+        return PlaceSerializer
 
 
 class OrganisationGenderedMembershipList(generics.ListCreateAPIView):
@@ -76,7 +87,11 @@ class OrganisationList(generics.ListCreateAPIView):
 
 class OrganisationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return OrganisationAdminSerializer
+        return OrganisationSerializer
 
 
 class EventList(generics.ListCreateAPIView):
@@ -93,4 +108,8 @@ class EventList(generics.ListCreateAPIView):
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return EventAdminSerializer
+        return EventSerializer

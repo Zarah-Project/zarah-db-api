@@ -4,7 +4,8 @@ from rest_framework import serializers
 
 from authority_list.models import Person, Organisation, Place, Event, PersonOtherName, PlaceOtherName, OrganisationForm, \
     OrganisationFormScale
-from authority_list.serializers import PersonOtherNameSerializer, PlaceOtherNameSerializer
+from authority_list.serializers.person_serializers import PersonOtherNameSerializer
+from authority_list.serializers.place_serializers import PlaceOtherNameSerializer
 from document.models import Document, DocumentTriggeringFactorKeyword, DocumentKeyword, DocumentFile
 from metadata.models import Classification
 
