@@ -117,10 +117,10 @@ class PublicIndexer:
                     self.doc['authority_search'].append(place.place_name)
 
                     if place.country and place.place_name != place.country:
-                        self.doc['place_facet'].append("%s, %s" % (place.place_name, place.country))
+                        self.doc['place_facet'].append(place.place_full)
                         self.doc['authority_search'].append(place.country)
                     else:
-                        self.doc['place_facet'].append(place.place_name)
+                        self.doc['place_facet'].append(place.place_full)
 
                     for other_name in place.other_names.iterator():
                         self.doc['authority_search'].append(other_name.place_name)
