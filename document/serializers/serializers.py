@@ -71,10 +71,7 @@ class EventReadSerializer(serializers.ModelSerializer):
 
 class PeopleReadSerializer(serializers.ModelSerializer):
     value = serializers.IntegerField(source='pk', read_only=True)
-    label = serializers.SerializerMethodField()
-
-    def get_label(self, obj):
-        return "%s %s" % (obj.first_name, obj.last_name)
+    label = serializers.CharField(source='full_name', read_only=True)
 
     class Meta:
         model = Person
@@ -83,7 +80,7 @@ class PeopleReadSerializer(serializers.ModelSerializer):
 
 class PlaceReadSerializer(serializers.ModelSerializer):
     value = serializers.IntegerField(source='pk', read_only=True)
-    label = serializers.CharField(source='place_name', read_only=True)
+    label = serializers.CharField(source='place_full', read_only=True)
 
     class Meta:
         model = Place
