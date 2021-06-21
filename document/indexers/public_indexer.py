@@ -135,7 +135,7 @@ class PublicIndexer:
             for event in self.document.events.iterator():
                 if event.is_public:
                     self.doc['authority_search'].append(event.event)
-                    self.doc['event_facet'].append(event.event)
+                    self.doc['event_facet'].append(event.event_full)
 
         # Zotero
         if self.document.zotero_data:
