@@ -70,6 +70,10 @@ class DocumentPublicSearch(ListAPIView):
         filters = self._append_filters(request, filters, 'activist_repertoire_scale')
         filters = self._append_filters(request, filters, 'format_of_participation')
         filters = self._append_filters(request, filters, 'knowledge_production')
+        filters = self._append_filters(request, filters, 'archive')
+        filters = self._append_filters(request, filters, 'item_type')
+        filters = self._append_filters(request, filters, 'language')
+        filters = self._append_filters(request, filters, 'author')
 
         year_start = request.query_params.get('year_start', None)
         year_end = request.query_params.get('year_end', None)
