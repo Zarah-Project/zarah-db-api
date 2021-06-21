@@ -61,6 +61,10 @@ class PublicIndexer:
             'format_of_participation_facet': [],
             'knowledge_production_facet': [],
             'date_facet': [],
+            'archive_facet': [],
+            'language_facet': [],
+            'item_type_facet': [],
+            'author_facet': [],
 
             # Sort fields
             'title_sort': None,
@@ -87,6 +91,9 @@ class PublicIndexer:
         self.doc['title'] = self.document.title
         self.doc['item_type'] = self.document.item_type
         self.doc['attachment_type'] = self.document.attachment_type
+
+        # Facets
+        self.doc['item_type_facet'] = self.document.item_type
 
         # Search
         self.doc['title_search'] = self.doc['title']
@@ -145,11 +152,19 @@ class PublicIndexer:
                         last_name = creator['lastName']
                     self.doc['zotero_search'].append(("%s %s" % (first_name, last_name)).strip())
                     self.doc['author'] = ("%s %s" % (first_name, last_name)).strip()
+                    self.doc['author_facet'] = ("%s %s" % (first_name, last_name)).strip()
+
+            if 'language' in zotero_data.keys():
+                if zotero_data['language'] != '':
+                    languages = zotero_data['language'].split(',')
+                    for lang in languages:
+                        self.doc['language_facet'].append(lang.strip())
 
             # Zotero - Archive
             if 'archive' in zotero_data.keys():
                 self.doc['zotero_search'].append(zotero_data['archive'])
                 self.doc['archive'] = zotero_data['archive']
+                self.doc['archive_facet'] = zotero_data['archive']
 
             # Zotero - Archive Location
             if 'archiveLocation' in zotero_data.keys():

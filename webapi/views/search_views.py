@@ -49,7 +49,8 @@ class DocumentPublicSearch(ListAPIView):
                 'person_facet', 'organisation_facet', 'place_facet', 'event_facet', 'keyword_facet',
                 'historical_context_facet', 'labour_conditions_facet', 'living_conditions_facet',
                 'labour_relations_facet', 'activist_repertoire_facet', 'activist_repertoire_scale_facet',
-                'format_of_participation_facet', 'knowledge_production_facet', 'date_facet'
+                'format_of_participation_facet', 'knowledge_production_facet', 'date_facet',
+                'item_type_facet', 'author_facet', 'language_facet', 'archive_facet'
             ],
             'hl': 'on',
             'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,classification_search,keyword_search',
