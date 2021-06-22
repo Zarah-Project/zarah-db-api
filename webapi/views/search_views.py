@@ -50,7 +50,7 @@ class DocumentPublicSearch(ListAPIView):
                 'historical_context_facet', 'labour_conditions_facet', 'living_conditions_facet',
                 'labour_relations_facet', 'activist_repertoire_facet', 'activist_repertoire_scale_facet',
                 'format_of_participation_facet', 'knowledge_production_facet', 'date_facet',
-                'item_type_facet', 'author_facet', 'language_facet', 'archive_facet'
+                'item_type_facet', 'author_facet', 'language_facet', 'archive_facet', 'agendas_facet'
             ],
             'hl': 'on',
             'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,classification_search,keyword_search',
@@ -66,6 +66,7 @@ class DocumentPublicSearch(ListAPIView):
         filters = self._append_filters(request, filters, 'labour_conditions')
         filters = self._append_filters(request, filters, 'living_conditions')
         filters = self._append_filters(request, filters, 'labour_relations')
+        filters = self._append_filters(request, filters, 'agendas')
         filters = self._append_filters(request, filters, 'activist_repertoire')
         filters = self._append_filters(request, filters, 'activist_repertoire_scale')
         filters = self._append_filters(request, filters, 'format_of_participation')

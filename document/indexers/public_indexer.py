@@ -56,6 +56,7 @@ class PublicIndexer:
             'labour_conditions_facet': [],
             'living_conditions_facet': [],
             'labour_relations_facet': [],
+            'agendas_facet': [],
             'activist_repertoire_facet': [],
             'activist_repertoire_scale_facet': [],
             'format_of_participation_facet': [],
@@ -203,6 +204,7 @@ class PublicIndexer:
             self.doc['labour_conditions_facet'] = self._index_classification('labour_conditions')
             self.doc['living_conditions_facet'] = self._index_classification('living_conditions')
             self.doc['labour_relations_facet'] = self._index_classification('labour_relations')
+            self.doc['agendas_facet'] = self._index_classification('agendas')
             self.doc['activist_repertoire_facet'] = self._index_classification('activist_repertoire')
             self.doc['activist_repertoire_scale_facet'] = self._index_classification('activist_repertoire_scale')
             self.doc['format_of_participation_facet'] = self._index_classification('format_of_participation')
