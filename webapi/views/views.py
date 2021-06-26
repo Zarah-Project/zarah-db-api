@@ -11,7 +11,8 @@ from rest_framework.views import APIView
 from authority_list.models import Person, Organisation, Place, Event
 from document.models import Document, DocumentFile
 from webapi.serializers import DocumentReadPublicSerializer, DocumentReadTeamSerializer, \
-    DocumentReadIndividualSerializer, DocumentCitationSerializer
+    DocumentReadIndividualSerializer, DocumentCitationSerializer, PersonSerializer, OrganisationSerializer, \
+    EventSerializer, PlaceSerializer
 
 
 class DocumentPublicDetail(generics.RetrieveAPIView):
@@ -73,3 +74,31 @@ class StoredFilePublicView(APIView):
                 return response
             except FileNotFoundError:
                 return Response(data='Not found', status=status.HTTP_404_NOT_FOUND)
+
+
+class PersonPublicDetail(generics.RetrieveAPIView):
+    authentication_classes = []
+    permission_classes = []
+    queryset = Person.objects.filter(is_public=True)
+    serializer_class = PersonSerializer
+
+
+class OrganisationPublicDetail(generics.RetrieveAPIView):
+    authentication_classes = []
+    permission_classes = []
+    queryset = Organisation.objects.filter(is_public=True)
+    serializer_class = OrganisationSerializer
+
+
+class EventPublicDetail(generics.RetrieveAPIView):
+    authentication_classes = []
+    permission_classes = []
+    queryset = Event.objects.filter(is_public=True)
+    serializer_class = EventSerializer
+
+
+class PlacePublicDetail(generics.RetrieveAPIView):
+    authentication_classes = []
+    permission_classes = []
+    queryset = Place.objects.filter(is_public=True)
+    serializer_class = PlaceSerializer

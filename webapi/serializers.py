@@ -15,7 +15,7 @@ class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ['full_name', 'other_names', 'notes']
+        fields = ['id', 'full_name', 'other_names', 'notes']
 
 
 class PlaceSerializer(serializers.ModelSerializer):
@@ -39,21 +39,17 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ['full_name', 'place_name', 'other_names', 'country', 'notes']
+        fields = ['id', 'full_name', 'place_full', 'place_name', 'other_names', 'country', 'notes']
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
     organisation_form = serializers.SlugRelatedField(slug_field='form', queryset=OrganisationForm.objects.all())
     organisation_form_scale = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
     organisation_gendered_membership = serializers.SlugRelatedField(slug_field='membership', queryset=OrganisationFormScale.objects.all())
 
-    def get_full_name(self, obj):
-        return "%s (%s)" % (obj.name, obj.acronym)
-
     class Meta:
         model = Organisation
-        fields = ['full_name', 'name', 'acronym',
+        fields = ['id', 'full_name', 'name', 'acronym',
                   'organisation_form', 'organisation_form_text',
                   'organisation_form_scale', 'organisation_form_scale_text',
                   'organisation_gendered_membership', 'organisation_gendered_membership_text',

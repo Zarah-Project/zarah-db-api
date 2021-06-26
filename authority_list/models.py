@@ -52,6 +52,13 @@ class Organisation(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def full_name(self):
+        if self.acronym:
+            return "%s (%s)" % (self.name, self.acronym)
+        else:
+            return self.name
+
     class Meta:
         db_table = 'organisations'
 
