@@ -160,8 +160,12 @@ class PublicIndexer:
             if 'language' in zotero_data.keys():
                 if zotero_data['language'] != '':
                     languages = zotero_data['language'].split(',')
-                    for lang in languages:
-                        self.doc['language_facet'].append(lang.strip())
+                    for idx, lang in enumerate(languages):
+                        if lang.strip() == 'English':
+                            if len(languages) == 1 or idx == 0:
+                                self.doc['language_facet'].append(lang.strip())
+                        else:
+                            self.doc['language_facet'].append(lang.strip())
 
             # Zotero - Archive
             if 'archive' in zotero_data.keys():
