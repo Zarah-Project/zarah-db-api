@@ -75,18 +75,18 @@ class DocumentIndexer:
 
         for person in self.document.people.iterator():
             self.doc['authority_search'].append("%s %s" % (person.first_name, person.last_name))
-            self.doc['authority_search'].append(person.notes)
+            self.doc['authority_search'].append(person.notes if person.notes else "")
             for other_name in person.other_names.iterator():
                 self.doc['authority_search'].append("%s %s" % (other_name.first_name, other_name.last_name))
 
         for organisation in self.document.organisations.iterator():
             self.doc['authority_search'].append(organisation.name)
             self.doc['authority_search'].append(organisation.acronym)
-            self.doc['authority_search'].append(organisation.notes)
+            self.doc['authority_search'].append(organisation.notes if organisation.notes else "")
 
         for place in self.document.places.iterator():
             self.doc['authority_search'].append(place.place_name)
-            self.doc['authority_search'].append(place.notes)
+            self.doc['authority_search'].append(place.notes if place.notes else "")
             for other_name in place.other_names.iterator():
                 self.doc['authority_search'].append(other_name.place_name)
 
