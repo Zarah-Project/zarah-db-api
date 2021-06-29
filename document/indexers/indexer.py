@@ -75,20 +75,23 @@ class DocumentIndexer:
 
         for person in self.document.people.iterator():
             self.doc['authority_search'].append("%s %s" % (person.first_name, person.last_name))
+            self.doc['authority_search'].append(person.notes)
             for other_name in person.other_names.iterator():
                 self.doc['authority_search'].append("%s %s" % (other_name.first_name, other_name.last_name))
 
         for organisation in self.document.organisations.iterator():
             self.doc['authority_search'].append(organisation.name)
             self.doc['authority_search'].append(organisation.acronym)
+            self.doc['authority_search'].append(organisation.notes)
 
         for place in self.document.places.iterator():
             self.doc['authority_search'].append(place.place_name)
+            self.doc['authority_search'].append(place.notes)
             for other_name in place.other_names.iterator():
                 self.doc['authority_search'].append(other_name.place_name)
 
         for event in self.document.events.iterator():
-            self.doc['authority_search'].append(event.event)
+            self.doc['authority_search'].append(event.event_full)
 
         if self.document.zotero_data:
             zotero_data = json.loads(self.document.zotero_data)
