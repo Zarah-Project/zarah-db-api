@@ -110,6 +110,7 @@ class PublicIndexer:
             for person in self.document.people.iterator():
                 if person.is_public:
                     self.doc['authority_search'].append("%s %s" % (person.first_name, person.last_name))
+                    self.doc['authority_search'].append(person.notes)
                     self.doc['person_facet'].append("%s" % person.full_name)
                     self.doc['person_id_facet'].append("%s#%s" % (person.full_name, person.id))
                     for other_name in person.other_names.iterator():
@@ -119,15 +120,14 @@ class PublicIndexer:
                 if organisation.is_public:
                     self.doc['authority_search'].append(organisation.name)
                     self.doc['authority_search'].append(organisation.acronym)
+                    self.doc['authority_search'].append(organisation.notes)
                     self.doc['organisation_facet'].append("%s" % organisation.full_name)
                     self.doc['organisation_id_facet'].append("%s#%s" % (organisation.full_name, organisation.id))
 
             for place in self.document.places.iterator():
                 if place.is_public:
-                    self.doc['authority_search'].append(place.place_name)
-
-                    if place.country and place.place_name != place.country:
-                        self.doc['authority_search'].append(place.country)
+                    self.doc['authority_search'].append(place.place_full)
+                    self.doc['authority_search'].append(place.notes)
                     self.doc['place_facet'].append(place.place_full)
                     self.doc['place_id_facet'].append("%s#%s" % (place.place_full, place.id))
 
@@ -136,7 +136,7 @@ class PublicIndexer:
 
             for event in self.document.events.iterator():
                 if event.is_public:
-                    self.doc['authority_search'].append(event.event)
+                    self.doc['authority_search'].append(event.event_full)
                     self.doc['event_facet'].append(event.event_full)
                     self.doc['event_id_facet'].append("%s#%s" % (event.event_full, event.id))
 
