@@ -95,6 +95,7 @@ class PublicIndexer:
         self.doc['id'] = self.document.id
         self.doc['title'] = self.document.title
         self.doc['item_type'] = self.document.item_type
+        self.doc['record_type'] = "document"
         self.doc['attachment_type'] = self.document.attachment_type
 
         # Facets
@@ -149,6 +150,7 @@ class PublicIndexer:
                 for creator in zotero_data['creators']:
                     first_name = ""
                     last_name = ""
+                    name = ""
                     if 'firstName' in creator.keys():
                         first_name = creator['firstName']
                     if 'lastName' in creator.keys():
@@ -156,6 +158,12 @@ class PublicIndexer:
                     self.doc['zotero_search'].append(("%s %s" % (first_name, last_name)).strip())
                     self.doc['author'] = ("%s %s" % (first_name, last_name)).strip()
                     self.doc['author_facet'] = ("%s %s" % (first_name, last_name)).strip()
+
+                    if 'name' in creator.keys():
+                        name = creator['name']
+                        self.doc['zotero_search'].append(name.strip())
+                        self.doc['author'] = name.strip()
+                        self.doc['author_facet'] = name.strip()
 
             if 'language' in zotero_data.keys():
                 if zotero_data['language'] != '':
