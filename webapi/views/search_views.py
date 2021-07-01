@@ -118,8 +118,8 @@ class DocumentPublicSearch(ListAPIView):
 
     def _append_query_fields(self, request, qf):
         fields = {
-            'title': 'title_search^5',
-            'authority': 'authority_search^4',
+            'title': 'title_search^10',
+            'authority': 'authority_search^5',
             'name': 'name_search^4',
             'abstract': 'abstract_search^4',
             'zotero': 'zotero_search^3.5',
