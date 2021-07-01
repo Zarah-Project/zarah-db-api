@@ -16,16 +16,13 @@ class PublicAuthorityIndexer:
         self.doc = {
             # Display fields
             'id': None,
-            'title': None,
+            'name': None,
             'record_type': None,
 
             # Search fields
             'name_search': [],
             'note_search': "",
             'date_search': "",
-
-            # Sort fields
-            'title_sort': None,
         }
 
     def index(self):
