@@ -43,7 +43,7 @@ class DocumentPublicSearch(ListAPIView):
             'search': query,
             'ordering': ordering,
             'qf': qf,
-            'fl': 'id,title,item_type,attachment_type,author,archive,archive_location,date',
+            'fl': 'id,title,name,item_type,record_type,attachment_type,author,archive,archive_location,date',
             'facet': True,
             'facet_fields': [
                 'person_facet', 'person_id_facet',
@@ -56,7 +56,7 @@ class DocumentPublicSearch(ListAPIView):
                 'item_type_facet', 'author_facet', 'language_facet', 'archive_facet', 'agendas_facet'
             ],
             'hl': 'on',
-            'hl.fl': 'title_search,abstract_search,attachment_text_search,authority_search,zotero_search,classification_search,keyword_search',
+            'hl.fl': 'title_search,name_search,note_search,abstract_search,attachment_text_search,authority_search,zotero_search,classification_search,keyword_search',
             'hl.fragsize': '200',
             'facet_sort': 'index'
         }
@@ -119,6 +119,8 @@ class DocumentPublicSearch(ListAPIView):
     def _append_query_fields(self, request, qf):
         fields = {
             'attachment_text': 'attachment_text_search^5',
+            'note': 'note_search^3.5',
+            'name': 'name_search^3',
             'title': 'title_search^3',
             'abstract': 'abstract_search^2.5',
             'authority': 'authority_search^2.5',
