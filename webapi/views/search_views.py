@@ -118,14 +118,13 @@ class DocumentPublicSearch(ListAPIView):
 
     def _append_query_fields(self, request, qf):
         fields = {
-            'attachment_text': 'attachment_text_search^5',
-            'note': 'note_search^3.5',
-            'name': 'name_search^3',
-            'title': 'title_search^3',
-            'abstract': 'abstract_search^2.5',
-            'authority': 'authority_search^2.5',
-            'classification': 'classification_search^2.5',
-            'zotero': 'zotero_search^1.5',
+            'title': 'title_search^5',
+            'name': 'name_search^4.5',
+            'abstract': 'abstract_search^4',
+            'zotero': 'zotero_search^3.5',
+            'note': 'note_search^3',
+            'attachment_text': 'attachment_text_search^2.5',
+            'classification': 'classification_search^2',
             'keyword': 'keyword_search^1.5'
         }
         qf_param = request.query_params.getlist('query_fields', None)
