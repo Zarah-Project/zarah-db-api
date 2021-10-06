@@ -169,7 +169,7 @@ class Searcher:
                     if index % 2 == 0:
                         records_dict[element] = records[index + 1]
                         record_values.append(element)
-                locale.setlocale(locale.LC_ALL, "de_DE.UTF-8")
+                # locale.setlocale(locale.LC_ALL, "de_DE.UTF-8")
                 record_values = sorted(record_values, key=locale.strxfrm)
                 for v in record_values:
                     result_values.append(v)
