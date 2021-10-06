@@ -1,3 +1,5 @@
+import locale
+
 import pysolr
 from django.conf import settings
 
@@ -86,7 +88,7 @@ class Searcher:
             'facet.mincount': 1
         }
         if self.paginated:
-            return self.solr.search(
+            results = self.solr.search(
                 q=self.q,
                 sort=self.sort,
                 start=self.start,
@@ -95,13 +97,14 @@ class Searcher:
                 **search_kwargs
             )
         else:
-            return self.solr.search(
+            results = self.solr.search(
                 q=self.q,
                 sort=self.sort,
                 facet=self.facet,
                 cursorMark=cursor_mark,
                 **search_kwargs
             )
+        return self.reorder_facets(results)
 
     def set_q(self, search):
         self.q = search
@@ -153,3 +156,23 @@ class Searcher:
 
     def set_fl(self, fl):
         self.fl = fl
+
+    def reorder_facets(self, results):
+        keys_to_check = ['person_facet', 'organisation_facet', 'place_facet', 'event_facet', 'author_facet']
+        for key in results.facets['facet_fields'].keys():
+            if key in keys_to_check:
+                records_dict = {}
+                record_values = []
+                result_values = []
+                records = results.facets['facet_fields'][key]
+                for index, element in enumerate(records):
+                    if index % 2 == 0:
+                        records_dict[element] = records[index + 1]
+                        record_values.append(element)
+                locale.setlocale(locale.LC_ALL, "de_DE.UTF-8")
+                record_values = sorted(record_values, key=locale.strxfrm)
+                for v in record_values:
+                    result_values.append(v)
+                    result_values.append(records_dict[v])
+                results.facets['facet_fields'][key] = result_values
+        return results
