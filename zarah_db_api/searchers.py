@@ -159,7 +159,8 @@ class Searcher:
         self.fl = fl
 
     def reorder_facets(self, results):
-        keys_to_check = ['person_facet', 'organisation_facet', 'place_facet', 'event_facet', 'author_facet']
+        keys_to_check = ['person_id_facet', 'organisation_id_facet', 'place_id_facet', 'event_id_facet',
+                         'author_facet', 'archive_facet']
         for key in results.facets['facet_fields'].keys():
             if key in keys_to_check:
                 c = Collator()
