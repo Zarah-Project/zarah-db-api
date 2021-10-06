@@ -2,6 +2,7 @@ import locale
 
 import pysolr
 from django.conf import settings
+from pyuca import Collator
 
 
 class Searcher:
@@ -161,6 +162,7 @@ class Searcher:
         keys_to_check = ['person_facet', 'organisation_facet', 'place_facet', 'event_facet', 'author_facet']
         for key in results.facets['facet_fields'].keys():
             if key in keys_to_check:
+                c = Collator()
                 records_dict = {}
                 record_values = []
                 result_values = []
@@ -169,8 +171,7 @@ class Searcher:
                     if index % 2 == 0:
                         records_dict[element] = records[index + 1]
                         record_values.append(element)
-                # locale.setlocale(locale.LC_ALL, "de_DE.UTF-8")
-                record_values = sorted(record_values, key=locale.strxfrm)
+                record_values = sorted(record_values, key=c.sort_key)
                 for v in record_values:
                     result_values.append(v)
                     result_values.append(records_dict[v])
