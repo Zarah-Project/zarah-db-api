@@ -36,7 +36,7 @@ class PlaceList(generics.ListCreateAPIView):
     serializer_class = PlaceSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_filter = ['place_name', 'country']
-    search_fields = ['place_name', 'other_names__place_name']
+    search_fields = ['place_name', 'other_names__place_name', 'country']
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
