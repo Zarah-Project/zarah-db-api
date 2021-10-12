@@ -39,7 +39,7 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ['id', 'full_name', 'place_full', 'place_name', 'other_names', 'country', 'notes']
+        fields = ['id', 'full_name', 'place_full', 'place_name', 'other_names', 'country']
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
