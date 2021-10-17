@@ -77,14 +77,17 @@ class PublicIndexer:
         }
 
     def index(self):
-        self._index_record()
-        if self.document.attachment_type == 'default':
-            self._index_file_content()
-        try:
-            self.solr.add([self.doc], commit=True)
-            print('Indexed record no. %s!' % self.doc['id'])
-        except pysolr.SolrError as e:
-            print('Error with record no. %s! Error: %s' % (self.doc['id'], e))
+        if self.document.record_type != 'individual':
+            self._index_record()
+            if self.document.attachment_type == 'default':
+                self._index_file_content()
+            try:
+                self.solr.add([self.doc], commit=True)
+                print('Indexed record no. %s!' % self.doc['id'])
+            except pysolr.SolrError as e:
+                print('Error with record no. %s! Error: %s' % (self.doc['id'], e))
+        else:
+            self.remove_record()
 
     def remove_record(self):
         self.solr.delete(self.document.id)
@@ -211,8 +214,7 @@ class PublicIndexer:
                 self.doc['keyword_facet'].append(keyword.keyword)
 
         # Classifications
-        if self.document.record_type != 'individual':
-            self.doc['historical_context_facet'] = self._index_classification('historical_context')
+        self.doc['historical_context_facet'] = self._index_classification('historical_context')
 
         if self.document.record_type == 'default':
             self.doc['labour_conditions_facet'] = self._index_classification('labour_conditions')
