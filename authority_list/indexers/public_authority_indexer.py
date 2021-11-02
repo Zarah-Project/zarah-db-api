@@ -28,13 +28,13 @@ class PublicAuthorityIndexer:
     def index(self):
         if self.authority_record.is_public:
             self._index_record()
+            try:
+                self.solr.add([self.doc], commit=True)
+                print('Indexed authority record no. %s!' % self.doc['id'])
+            except pysolr.SolrError as e:
+                print('Error with record no. %s! Error: %s' % (self.doc['id'], e))
         else:
             self.remove_record()
-        try:
-            self.solr.add([self.doc], commit=True)
-            print('Indexed authority record no. %s!' % self.doc['id'])
-        except pysolr.SolrError as e:
-            print('Error with record no. %s! Error: %s' % (self.doc['id'], e))
 
     def _index_record(self):
         # Stored fields
