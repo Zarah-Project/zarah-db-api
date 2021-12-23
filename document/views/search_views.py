@@ -16,10 +16,11 @@ class DocumentSearch(ListAPIView):
     core = getattr(settings, "SOLR_CORE", "zarah")
 
     def list(self, request, *args, **kwargs):
+        user = request.user
         limit = request.query_params.get('limit', 10)
         offset = request.query_params.get('offset', 0)
 
-        query = request.query_params.get('query', '')
+        query = request.query_params.get('query', '*:*')
 
         if query != '':
             ordering = request.query_params.get('ordering', '-score')
@@ -30,6 +31,11 @@ class DocumentSearch(ListAPIView):
         filters_or = []
         date_filters = []
 
+        if user.is_staff or user.is_superuser:
+            search = query
+        else:
+            search = "%s AND NOT (metadata_privacy:individual AND -created_by:%s)" % (query, user)
+
         qf = [
             'title_search^5',
             'full_text^3',
@@ -38,7 +44,7 @@ class DocumentSearch(ListAPIView):
             'classification_search^2.5',
         ]
         params = {
-            'search': query,
+            'search': search,
             'ordering': ordering,
             'qf': qf,
             'fl': 'id,title,language,item_type,year,created_by,metadata_privacy,document_privacy',
@@ -61,9 +67,8 @@ class DocumentSearch(ListAPIView):
 
         try:
             response = searcher.search()
-            user = self.request.user
 
-            for doc in response.docs:
+            for index, doc in enumerate(response.docs):
                 if 'created_by' in doc.keys():
                     doc['is_editable'] = user.username == doc['created_by'] or user.is_staff or user.is_superuser
                 else:
