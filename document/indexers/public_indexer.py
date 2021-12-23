@@ -34,6 +34,7 @@ class PublicIndexer:
             'archive': None,
             'archive_location': None,
             'date': None,
+            'publication': None,
             'file': [],
 
             # Search fields
@@ -177,6 +178,11 @@ class PublicIndexer:
                                 self.doc['language_facet'].append(lang.strip())
                         else:
                             self.doc['language_facet'].append(lang.strip())
+
+            # Zotero - Publication Title
+            if 'publicationTitle' in zotero_data.keys():
+                self.doc['zotero_search'].append(zotero_data['publicationTitle'])
+                self.doc['publication'] = zotero_data['publicationTitle']
 
             # Zotero - Archive
             if 'archive' in zotero_data.keys():
