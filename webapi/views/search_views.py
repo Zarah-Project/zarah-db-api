@@ -43,7 +43,7 @@ class DocumentPublicSearch(ListAPIView):
             'search': query,
             'ordering': ordering,
             'qf': qf,
-            'fl': 'id,title,name,item_type,record_type,attachment_type,author,archive,archive_location,date',
+            'fl': 'id,title,name,item_type,record_type,attachment_type,author,archive,archive_location,date,publication',
             'facet': True,
             'facet_fields': [
                 'person_facet', 'person_id_facet',
