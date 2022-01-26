@@ -81,19 +81,16 @@ class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateDestroyAPIVie
 
         if method == 'GET':
             if document.created_by:
-                # Own record
-                if document.created_by.id == user.id:
+                # Staff or Admin
+                if user.is_staff or user.is_superuser:
                     return DocumentReadFullSerializer
-                # Default
-                elif document.record_type == 'default':
-                    return DocumentReadFullSerializer
-                # Team
-                elif document.record_type == 'team':
-                    return DocumentReadFullSerializer
-                # Individual
                 else:
-                    return DocumentReadIndividualSerializer
+                    # Own Record
+                    if document.created_by.id == user.id:
+                        return DocumentReadFullSerializer
+                    else:
+                        return Response({})
             else:
-                return DocumentReadFullSerializer
+                return Response({})
         else:
             return DocumentWriteSerializer
