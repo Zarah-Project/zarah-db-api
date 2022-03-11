@@ -264,6 +264,8 @@ class PublicIndexer:
         zotero_item_types = getattr(settings, 'ZOTERO_ITEM_TYPES', {})
         if item_type in zotero_item_types:
             return zotero_item_types[item_type]
+        else:
+            return item_type
 
     def _from_to_date(self, date):
         if date.find('Likely') > -1:
