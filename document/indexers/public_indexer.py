@@ -13,7 +13,6 @@ from django.conf import settings
 
 tika.TikaClientOnly = True
 
-
 class PublicIndexer:
     """
     Class to index Document records to Solr public.
@@ -98,12 +97,12 @@ class PublicIndexer:
         # Stored fields
         self.doc['id'] = self.document.id
         self.doc['title'] = self.document.title
-        self.doc['item_type'] = self.document.item_type
+        self.doc['item_type'] = self._get_item_type(self.document.item_type)
         self.doc['record_type'] = "document"
         self.doc['attachment_type'] = self.document.attachment_type
 
         # Facets
-        self.doc['item_type_facet'] = self.document.item_type
+        self.doc['item_type_facet'] = self._get_item_type(self.document.item_type)
 
         # Search
         self.doc['title_search'] = self.doc['title']
@@ -260,6 +259,11 @@ class PublicIndexer:
                     self.doc['attachment_text_search'] = parsed["content"]
                 except Exception as e:
                     print(e)
+
+    def _get_item_type(self, item_type):
+        zotero_item_types = settings.get('ZOTERO_ITEM_TYPES', {})
+        if item_type in zotero_item_types:
+            return zotero_item_types[item_type]
 
     def _from_to_date(self, date):
         if date.find('Likely') > -1:

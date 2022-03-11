@@ -118,7 +118,7 @@ class DocumentIndexer:
 
             # Zotero - Item Type
             if 'itemType' in zotero_data.keys():
-                self.doc['item_type'] = zotero_data['itemType']
+                self.doc['item_type'] = self._get_item_type(zotero_data['itemType'])
 
             # Zotero - Date
             if 'date' in zotero_data.keys():
@@ -154,6 +154,11 @@ class DocumentIndexer:
                     self.doc['full_text'].append(parsed["content"])
                 except Exception as e:
                     print(e)
+
+    def _get_item_type(self, item_type):
+        zotero_item_types = settings.get('ZOTERO_ITEM_TYPES', {})
+        if item_type in zotero_item_types:
+            return zotero_item_types[item_type]
 
     def _parse_date(self, date):
         date = date.replace('Likely', '')
