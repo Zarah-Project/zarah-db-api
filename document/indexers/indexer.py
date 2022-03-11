@@ -156,7 +156,7 @@ class DocumentIndexer:
                     print(e)
 
     def _get_item_type(self, item_type):
-        zotero_item_types = settings.get('ZOTERO_ITEM_TYPES', {})
+        zotero_item_types = getattr(settings, 'ZOTERO_ITEM_TYPES', {})
         if item_type in zotero_item_types:
             return zotero_item_types[item_type]
 
