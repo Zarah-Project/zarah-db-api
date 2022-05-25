@@ -27,7 +27,7 @@ importlib-metadata==1.7.0
 kombu==4.6.11
 mysqlclient==1.4.6
 pathlib==1.0.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyparsing==2.4.7
 pysolr==3.9.0
 pytz==2020.1
