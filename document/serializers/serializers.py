@@ -164,6 +164,12 @@ class DocumentReadIndividualSerializer(serializers.ModelSerializer):
         exclude = ('abstract', 'additional_research')
 
 
+class DocumentReadIndividualSerializerNonCreator(serializers.ModelSerializer):
+    class Meta:
+        model = Document
+        include = ('title', )
+
+
 class DocumentWriteSerializer(WritableNestedModelSerializer):
     consents = DocumentConsentSerializer(many=True, required=False)
     keywords = DocumentKeywordSerializer(many=True, required=False)
