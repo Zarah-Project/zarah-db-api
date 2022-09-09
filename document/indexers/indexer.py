@@ -159,6 +159,8 @@ class DocumentIndexer:
         zotero_item_types = getattr(settings, 'ZOTERO_ITEM_TYPES', {})
         if item_type in zotero_item_types:
             return zotero_item_types[item_type]
+        else:
+            return item_type
 
     def _parse_date(self, date):
         date = date.replace('Likely', '')
