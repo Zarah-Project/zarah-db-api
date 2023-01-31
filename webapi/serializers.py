@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from pyzotero import zotero
 from rest_framework import serializers
 
@@ -7,7 +8,7 @@ from authority_list.models import Person, Organisation, Place, Event, PersonOthe
 from authority_list.serializers.person_serializers import PersonOtherNameSerializer
 from authority_list.serializers.place_serializers import PlaceOtherNameSerializer
 from document.models import Document, DocumentTriggeringFactorKeyword, DocumentKeyword, DocumentFile
-from metadata.models import Classification
+from metadata.models import Classification, ConsentType, DocumentConsent
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -110,6 +111,18 @@ class DocumentReadPublicSerializer(serializers.ModelSerializer):
     triggering_factor_keywords = serializers.SlugRelatedField(many=True, slug_field='keyword',
                                                               queryset=DocumentTriggeringFactorKeyword.objects.all())
     files = DocumentFileSerializer(many=True)
+    cc_display = serializers.SerializerMethodField()
+
+    def get_cc_display(self, obj):
+        consent_type = ConsentType.objects.get(key='cc_q4')
+        try:
+            consent = DocumentConsent.objects.get(
+                document=obj,
+                consent_type=consent_type
+            )
+            return consent.consent
+        except ObjectDoesNotExist:
+            return False
 
     def get_classifications(self, obj):
         allowed_keys = [
@@ -131,6 +144,18 @@ class DocumentReadPublicSerializer(serializers.ModelSerializer):
 class DocumentReadTeamSerializer(serializers.ModelSerializer):
     classifications = serializers.SerializerMethodField()
     files = DocumentFileSerializer(many=True)
+    cc_display = serializers.SerializerMethodField()
+
+    def get_cc_display(self, obj):
+        consent_type = ConsentType.objects.get(key='cc_q4')
+        try:
+            consent = DocumentConsent.objects.get(
+                document=obj,
+                consent_type=consent_type
+            )
+            return consent.consent
+        except ObjectDoesNotExist:
+            return False
 
     def get_classifications(self, obj):
         allowed_keys = ['historical_context']
@@ -147,6 +172,18 @@ class DocumentReadTeamSerializer(serializers.ModelSerializer):
 
 class DocumentReadIndividualSerializer(serializers.ModelSerializer):
     files = DocumentFileSerializer(many=True)
+    cc_display = serializers.SerializerMethodField()
+
+    def get_cc_display(self, obj):
+        consent_type = ConsentType.objects.get(key='cc_q4')
+        try:
+            consent = DocumentConsent.objects.get(
+                document=obj,
+                consent_type=consent_type
+            )
+            return consent.consent
+        except ObjectDoesNotExist:
+            return False
 
     class Meta:
         model = Document
