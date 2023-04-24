@@ -25,7 +25,7 @@ class OrganisationGenderedMembershipSerializer(serializers.ModelSerializer):
 class OrganisationSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     is_removable = serializers.SerializerMethodField()
-    is_public_user = serializers.BooleanField(read_only=True, source='is_public')
+    is_public = serializers.BooleanField()
     used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):

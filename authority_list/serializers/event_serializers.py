@@ -10,7 +10,7 @@ class EventSerializer(WritableNestedModelSerializer):
     date_from = ApproximateDateSerializerField()
     date_to = ApproximateDateSerializerField(required=False)
     is_removable = serializers.SerializerMethodField()
-    is_public_user = serializers.BooleanField(read_only=True, source='is_public')
+    is_public = serializers.BooleanField()
     used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
@@ -23,7 +23,7 @@ class EventSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Event
         fields = ('id', 'date_from', 'date_to', 'event', 'event_full', 'internal_notes', 'used', 'is_removable',
-                  'is_public_user', 'created_by')
+                  'is_public', 'created_by')
 
 
 class EventAdminSerializer(EventSerializer):

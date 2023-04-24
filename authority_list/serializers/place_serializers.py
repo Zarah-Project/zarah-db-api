@@ -14,7 +14,7 @@ class PlaceOtherNameSerializer(serializers.ModelSerializer):
 class PlaceSerializer(WritableNestedModelSerializer):
     other_names = PlaceOtherNameSerializer(many=True, required=False)
     is_removable = serializers.SerializerMethodField()
-    is_public_user = serializers.BooleanField(read_only=True, source='is_public')
+    is_public = serializers.BooleanField()
     used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
@@ -27,7 +27,7 @@ class PlaceSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Place
         fields = ('id', 'place_name', 'country', 'place_full', 'other_names', 'notes', 'internal_notes', 'is_removable',
-                  'is_public_user', 'used')
+                  'is_public', 'used')
 
 
 class PlaceAdminSerializer(PlaceSerializer):

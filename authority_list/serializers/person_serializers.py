@@ -14,7 +14,7 @@ class PersonOtherNameSerializer(serializers.ModelSerializer):
 class PersonSerializer(WritableNestedModelSerializer):
     other_names = PersonOtherNameSerializer(many=True, required=False)
     is_removable = serializers.SerializerMethodField()
-    is_public_user = serializers.BooleanField(read_only=True, source='is_public')
+    is_public = serializers.BooleanField()
     used = serializers.SerializerMethodField()
 
     def get_is_removable(self, obj):
@@ -27,7 +27,7 @@ class PersonSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Person
         fields = ['id', 'full_name', 'first_name', 'last_name', 'other_names', 'notes', 'internal_notes',
-                  'is_removable', 'is_public_user', 'used', 'created_by']
+                  'is_removable', 'is_public', 'used', 'created_by']
 
 
 class PersonAdminSerializer(PersonSerializer):

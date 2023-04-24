@@ -12,7 +12,7 @@ class Person(models.Model):
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
 
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=False)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -47,7 +47,7 @@ class Organisation(models.Model):
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
 
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=False)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -94,7 +94,7 @@ class Place(models.Model):
     notes = models.TextField(blank=True, null=True)
     internal_notes = models.TextField(blank=True, null=True)
 
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=False)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -128,7 +128,7 @@ class Event(models.Model):
     event = models.CharField(max_length=500, blank=True)
     internal_notes = models.TextField(blank=True, null=True)
 
-    is_public = models.BooleanField(default=True)
+    is_public = models.BooleanField(default=False)
 
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
