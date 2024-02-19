@@ -68,7 +68,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['event_full', 'date', 'event']
+        fields = ['id', 'event_full', 'date', 'event']
 
 
 class ClassificationSerializer(serializers.ModelSerializer):
