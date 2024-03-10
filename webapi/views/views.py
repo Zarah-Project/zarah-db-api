@@ -1,8 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Prefetch
+from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django_drf_filepond.api import get_stored_upload, get_stored_upload_file_data
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -12,9 +15,12 @@ from authority_list.models import Person, Organisation, Place, Event
 from document.models import Document, DocumentFile
 from webapi.serializers import DocumentReadPublicSerializer, DocumentReadTeamSerializer, \
     DocumentReadIndividualSerializer, DocumentCitationSerializer, PersonSerializer, OrganisationSerializer, \
-    EventSerializer, PlaceSerializer
+    EventSerializer, PlaceSerializer, DocumentListSerializer
 
 
+@method_decorator(name='get', decorator=swagger_auto_schema(
+    responses={200: openapi.Response('response description', DocumentReadPublicSerializer)}
+))
 class DocumentPublicDetail(generics.RetrieveAPIView):
     authentication_classes = []
     permission_classes = []
@@ -102,3 +108,28 @@ class PlacePublicDetail(generics.RetrieveAPIView):
     permission_classes = []
     queryset = Place.objects.filter(is_public=True)
     serializer_class = PlaceSerializer
+
+
+class DocumentsBySpecialRecord(generics.ListAPIView):
+    authentication_classes = []
+    permission_classes = []
+    serializer_class = DocumentListSerializer
+
+    def get_queryset(self):
+        record_type = self.kwargs.get('type')
+        id = self.kwargs.get('pk')
+
+        if record_type == 'person':
+            person = get_object_or_404(Person, pk=id)
+            return Document.objects.filter(people=person)
+        elif record_type == 'organisation':
+            organisation = get_object_or_404(Organisation, pk=id)
+            return Document.objects.filter(organisations=organisation)
+        elif record_type == 'event':
+            event = get_object_or_404(Event, pk=id)
+            return Document.objects.filter(events=event)
+        elif record_type == 'place':
+            place = get_object_or_404(Place, pk=id)
+            return Document.objects.filter(places=place)
+        else:
+            raise Http404

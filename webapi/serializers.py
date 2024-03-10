@@ -13,15 +13,23 @@ from metadata.models import Classification, ConsentType, DocumentConsent
 
 class PersonSerializer(serializers.ModelSerializer):
     other_names = PersonOtherNameSerializer(many=True, required=False)
+    used = serializers.SerializerMethodField()
+
+    def get_used(self, obj):
+        return Document.objects.filter(people=obj).count()
 
     class Meta:
         model = Person
-        fields = ['id', 'full_name', 'other_names', 'notes']
+        fields = ['id', 'full_name', 'other_names', 'notes', 'used']
 
 
 class PlaceSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
     other_names = PlaceOtherNameSerializer(many=True, required=False)
+    used = serializers.SerializerMethodField()
+
+    def get_used(self, obj):
+        return Document.objects.filter(places=obj).count()
 
     def get_full_name(self, obj):
         on = []
@@ -40,13 +48,17 @@ class PlaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Place
-        fields = ['id', 'full_name', 'place_full', 'place_name', 'other_names', 'country']
+        fields = ['id', 'full_name', 'place_full', 'place_name', 'other_names', 'country', 'used']
 
 
 class OrganisationSerializer(serializers.ModelSerializer):
     organisation_form = serializers.SlugRelatedField(slug_field='form', queryset=OrganisationForm.objects.all())
     organisation_form_scale = serializers.SlugRelatedField(slug_field='scale', queryset=OrganisationFormScale.objects.all())
     organisation_gendered_membership = serializers.SlugRelatedField(slug_field='membership', queryset=OrganisationFormScale.objects.all())
+    used = serializers.SerializerMethodField()
+
+    def get_used(self, obj):
+        return Document.objects.filter(organisations=obj).count()
 
     class Meta:
         model = Organisation
@@ -59,6 +71,10 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
 class EventSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
+    used = serializers.SerializerMethodField()
+
+    def get_used(self, obj):
+        return Document.objects.filter(events=obj).count()
 
     def get_date(self, obj):
         if obj.date_to:
@@ -68,7 +84,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ['id', 'event_full', 'date', 'event']
+        fields = ['id', 'event_full', 'date', 'event', 'used']
 
 
 class ClassificationSerializer(serializers.ModelSerializer):
@@ -91,7 +107,7 @@ class ClassificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classification
-        fields = ('category_key', 'full_name', 'field_type', 'text')
+        fields = ('category_key', 'full_name', 'field_type', 'text', 'used')
 
 
 class DocumentFileSerializer(serializers.ModelSerializer):
@@ -204,3 +220,9 @@ class DocumentCitationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Document
         fields = ('citation',)
+
+
+class DocumentListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Document
+        fields = ('id', 'title')
