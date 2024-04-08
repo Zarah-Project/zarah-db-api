@@ -29,7 +29,7 @@ class Document(CloneMixin, models.Model):
 
     # Clone fields
     _clone_excluded_model_fields = ['id', 'uuid', 'created_by', 'created_at']
-    _clone_many_to_many_fields = ['related_documents', 'people', 'organisations', 'events']
+    _clone_many_to_many_fields = ['related_documents', 'people', 'organisations', 'events', 'places']
     _clone_many_to_one_or_one_to_many_fields = ['triggering_factor_keywords', 'keywords',
                                                 'classifications', 'explanations', 'consents']
 

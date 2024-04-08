@@ -4,8 +4,8 @@ from metadata.models import ClassificationField, ClassificationCategory, Consent
 
 
 class ClassificationFieldAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category', 'parent', 'field', 'field_type')
-    list_editable = ('category', 'parent', 'field', 'field_type')
+    list_display = ('id', 'ordering', 'category', 'parent', 'field', 'field_type')
+    list_editable = ('field', 'ordering')
     list_filter = ('category', )
 
 

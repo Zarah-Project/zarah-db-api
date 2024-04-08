@@ -2,8 +2,11 @@ from rest_framework import generics, filters
 
 from authority_list.models import Person, Place, OrganisationForm, OrganisationFormScale, Organisation, \
     OrganisationGenderedMembership, Event
-from authority_list.serializers import PersonSerializer, PlaceSerializer, OrganisationFormSerializer, \
-    OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationGenderedMembershipSerializer, EventSerializer
+from authority_list.serializers.event_serializers import EventSerializer, EventAdminSerializer
+from authority_list.serializers.organisation_serializers import OrganisationGenderedMembershipSerializer, \
+    OrganisationFormSerializer, OrganisationFormScaleSerializer, OrganisationSerializer, OrganisationAdminSerializer
+from authority_list.serializers.person_serializers import PersonSerializer, PersonAdminSerializer
+from authority_list.serializers.place_serializers import PlaceSerializer, PlaceAdminSerializer
 
 
 class PersonList(generics.ListCreateAPIView):
@@ -14,10 +17,17 @@ class PersonList(generics.ListCreateAPIView):
     ordering_fields = ['last_name', 'first_name']
     search_fields = ['first_name', 'last_name', 'other_names__first_name', 'other_names__last_name']
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Person.objects.all()
-    serializer_class = PersonSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return PersonAdminSerializer
+        return PersonSerializer
 
 
 class PlaceList(generics.ListCreateAPIView):
@@ -26,12 +36,19 @@ class PlaceList(generics.ListCreateAPIView):
     serializer_class = PlaceSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     ordering_filter = ['place_name', 'country']
-    search_fields = ['place_name', 'other_names__place_name']
+    search_fields = ['place_name', 'other_names__place_name', 'country']
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class PlaceDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Place.objects.all()
-    serializer_class = PlaceSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return PlaceAdminSerializer
+        return PlaceSerializer
 
 
 class OrganisationGenderedMembershipList(generics.ListCreateAPIView):
@@ -64,10 +81,17 @@ class OrganisationList(generics.ListCreateAPIView):
     ordering_fields = ['name', 'acronym']
     search_fields = ['name', 'acronym']
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class OrganisationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Organisation.objects.all()
-    serializer_class = OrganisationSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return OrganisationAdminSerializer
+        return OrganisationSerializer
 
 
 class EventList(generics.ListCreateAPIView):
@@ -78,7 +102,14 @@ class EventList(generics.ListCreateAPIView):
     ordering_fields = ['event', 'date_from', 'date_to']
     search_fields = ['event', 'date_from', 'date_to']
 
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
 
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
-    serializer_class = EventSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return EventAdminSerializer
+        return EventSerializer

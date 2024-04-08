@@ -13,6 +13,8 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'django_drf_filepond',
+    'admin_ordering',
+    'drf_yasg',
 
     'authority_list',
     'document',

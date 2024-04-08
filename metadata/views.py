@@ -31,4 +31,14 @@ class ZoteroSearch(APIView):
         if search:
             zot = zotero.Zotero(settings.ZOTERO_LIBRARY_ID, 'group', settings.ZOTERO_API_KEY)
             items = zot.items(q=search, qmode='everything')
+            for item in items:
+                if 'itemType' in item['data']:
+                    item['data']['itemType'] = self._get_item_type(item['data']['itemType'])
         return Response(items, status=status.HTTP_200_OK)
+
+    def _get_item_type(self, item_type):
+        zotero_item_types = getattr(settings, 'ZOTERO_ITEM_TYPES', {})
+        if item_type in zotero_item_types:
+            return zotero_item_types[item_type]
+        else:
+            return item_type.capitalize()

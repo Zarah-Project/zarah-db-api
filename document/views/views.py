@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from document.indexer import DocumentIndexer
+from document.indexers.indexer import DocumentIndexer
 from document.models import Document
 from document.serializers.serializers import DocumentWriteSerializer, DocumentReadFullSerializer, \
     DocumentListSerializer, DocumentReadIndividualSerializer
@@ -81,19 +81,19 @@ class DocumentDetail(MethodSerializerMixin, generics.RetrieveUpdateDestroyAPIVie
 
         if method == 'GET':
             if document.created_by:
-                # Own record
-                if document.created_by.id == user.id:
+                # Staff or Admin
+                if user.is_staff or user.is_superuser:
                     return DocumentReadFullSerializer
-                # Default
-                elif document.record_type == 'default':
-                    return DocumentReadFullSerializer
-                # Team
-                elif document.record_type == 'team':
-                    return DocumentReadFullSerializer
-                # Individual
                 else:
-                    return DocumentReadIndividualSerializer
+                    # Own Record
+                    if document.created_by.id == user.id:
+                        return DocumentReadFullSerializer
+                    else:
+                        if document.record_type == 'team' or document.record_type == 'default':
+                            return DocumentReadFullSerializer
+                        else:
+                            return DocumentReadIndividualSerializer
             else:
-                return DocumentReadFullSerializer
+                return ''
         else:
             return DocumentWriteSerializer

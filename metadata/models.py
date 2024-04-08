@@ -4,7 +4,7 @@ from model_clone import CloneMixin
 
 class Classification(CloneMixin, models.Model):
     document = models.ForeignKey('document.Document', on_delete=models.CASCADE, related_name='classifications')
-    classification_field = models.ForeignKey('ClassificationField', on_delete=models.PROTECT)
+    classification_field = models.ForeignKey('ClassificationField', on_delete=models.CASCADE)
     classification_other_text = models.TextField(blank=True)
 
     _clone_many_to_one_or_one_to_many_fields = ['classification_field']
@@ -32,6 +32,7 @@ class ClassificationField(models.Model):
     category = models.ForeignKey('ClassificationCategory', on_delete=models.PROTECT)
     field_type = models.CharField(max_length=5, choices=[('tag', 'tag'), ('group', 'group'), ('other', 'other')])
     field = models.CharField(max_length=200)
+    ordering = models.IntegerField(default=0)
 
     @property
     def full_name(self):
@@ -45,6 +46,7 @@ class ClassificationField(models.Model):
 
     class Meta:
         db_table = 'classification_fields'
+        ordering = ['ordering', 'id']
 
 
 class ClassificationFurtherExplanation(CloneMixin, models.Model):

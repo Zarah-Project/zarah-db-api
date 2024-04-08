@@ -9,6 +9,8 @@ urlpatterns = [
     path('v1/document/', include('document.urls', namespace='document-v1')),
     path('v1/metadata/', include('metadata.urls', namespace='metadata-v1')),
 
+    path('v1/webapi/', include('webapi.urls', namespace='webapi-v1')),
+
     path('fp/', include('django_drf_filepond.urls')),
     path('admin/', admin.site.urls),
 
