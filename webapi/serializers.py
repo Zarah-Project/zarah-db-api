@@ -66,7 +66,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
                   'organisation_form', 'organisation_form_text',
                   'organisation_form_scale', 'organisation_form_scale_text',
                   'organisation_gendered_membership', 'organisation_gendered_membership_text',
-                  'notes']
+                  'notes', 'used']
 
 
 class EventSerializer(serializers.ModelSerializer):
