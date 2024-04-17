@@ -107,7 +107,7 @@ class ClassificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Classification
-        fields = ('category_key', 'full_name', 'field_type', 'text', 'used')
+        fields = ('category_key', 'full_name', 'field_type', 'text')
 
 
 class DocumentFileSerializer(serializers.ModelSerializer):
