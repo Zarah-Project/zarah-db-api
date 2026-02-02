@@ -47,7 +47,7 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
 
 class OrganisationAdminSerializer(OrganisationSerializer):
-    is_public = serializers.BooleanField(read_only=True)
+    is_public = serializers.BooleanField()
 
     class Meta:
         model = Organisation
